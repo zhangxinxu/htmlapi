@@ -5,12 +5,31 @@
 */
 
 const fs = require('fs');
-// stat = fs.stat;
+stat = fs.stat;
 
 const path = require('path');
 const url = require('url');
 
 const http = require('http');
+
+const promise = (fn) => (...params) => new Promise((resolve, reject) => {
+    fn(...params, function (err, ...res) {
+		if (err) {
+			reject(err);
+		} else {
+			resolve(...res);
+		}
+	})
+
+})
+
+const fs_stat = promise(fs.stat);
+const fs_readFile = promise(fs.readFile);
+const fs_readdir = promise(fs.readdir);
+const fs_unlink = promise(fs.unlink);
+const fs_rmdir = promise(fs.rmdir);
+const fs_mkdir = promise(fs.mkdir);
+const fs_writeFile = promise(fs.writeFile);
 
 /*
 ** 创建路径对应的文件夹（如果没有）
@@ -60,6 +79,10 @@ const copy = async function (src, dst) {
 	if (!fs.existsSync(src)) {
 		return;
 	}
+    // 目标目录不存在，新建之
+    if (!fs.existsSync(dst)) {
+        await createPath(dst);
+    }
 
 	// 读取目录中的所有文件/目录
 	var paths = await fs_readdir(src);
@@ -193,8 +216,8 @@ const compile = async function (src, dist) {
 
 const pathSrcAssets = './src/assets/';
 const pathDistAssets = './docs/assets/';
-const pathSrcHTML = './src/views';
-const pathDistHTML = './docs';
+const pathSrcHTML = './src/views/';
+const pathDistHTML = './docs/';
 
 // 任务
 const task = {
@@ -203,7 +226,7 @@ const task = {
 		init: async function () {
 			// 资源清理
 			await clean(pathDistAssets);
-			
+			console.log('复制静态资源中...');
             copy(pathSrcAssets, pathDistAssets);
 		}
 	},
@@ -211,7 +234,8 @@ const task = {
 		compile: async function () {
             const dirSrc = await fs_readdir(pathSrcHTML);
             dirSrc.forEach(async dir => {
-                if (fs.isDirectory(dir) && /^\d+$/.test(dir)) {
+                let st = await fs_stat(path.join(pathSrcHTML, dir));
+                if (st.isDirectory(dir) && /^\d+$/.test(dir)) {
                     const distDir = path.join(pathDistHTML, dir);
                     if (!fs.existsSync(distDir)) {
                         await createPath(distDir);
@@ -222,14 +246,15 @@ const task = {
 		},
         // 首页的编译
         home: function () {
-            this.compile(path.join(pathSrcHTML, 'index.html'), path.join(pathDistHTML, 'index.html'));
+            compile(pathSrcHTML, pathDistHTML);
         },
 		init: async function () {
 			// 删除对应文件夹
             // 所有数字文件夹处理
             const dirDist = await fs_readdir(pathDistHTML);
             dirDist.forEach(async dir => {
-                if (fs.isDirectory(dir) && /^\d+$/.test(dir)) {
+                let st = await fs_stat(path.join(pathDistHTML, dir));
+                if (st.isDirectory(dir) && /^\d+$/.test(dir)) {
                     await clean(path.join(pathDistHTML, dir));
                 }
             });
@@ -255,15 +280,11 @@ fs.watch(pathSrcAssets, {
 	clearTimeout(timerAssets);
 	console.log(filename + '发生了' + eventType + '变化');
 
-    if (filename == 'index.html') {
-        task.assets.home();
-    } else {
-        timerAssets = setTimeout(() => {
-            console.log('静态资源同步成功');
-           
-            task.assets.init();
-        }, 100);
-    }	
+    timerAssets = setTimeout(() => {
+        console.log('静态资源同步成功');
+       
+        task.assets.init();
+    }, 100);
 });
 
 // HTML监控任务
@@ -275,14 +296,19 @@ fs.watch(pathSrcHTML, {
 
 	console.log(filename + '发生了' + eventType + '变化');
 
-	timerHTML = setTimeout(() => {
-		task.html.init();
-		console.log('HTML编译执行...');
-	}, 100);
+
+    if (filename == 'index.html') {
+        task.assets.home();
+    } else {
+        timerHTML = setTimeout(() => {
+            task.html.init();
+            console.log('HTML编译执行...');
+        }, 100);
+    }
 });
 
 setTimeout(function () {
-	console.log('静态页面全面监控中...');
+	console.log('静态资源全面监控中...');
 }, 200);
 
 
@@ -354,5 +380,5 @@ let server = http.createServer(function (request, response) {
 
 // 设置监听端口
 server.listen(2001, '127.0.0.1', function () {
-	console.log('服务已经启动，访问地址为：\nhttp://127.0.0.1:'+ port +'/views/html/index.html');
+	console.log('服务已经启动，访问地址为：\nhttp://127.0.0.1:2001' +'/index.html');
 });
