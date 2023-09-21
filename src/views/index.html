@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>首页</title>
+    <link rel="import" href="./include/meta.html">
+</head>
+<body>
+    <link rel="import" href="./include/header.html?nav1=active">
+    <div class="main">
+        <h1>首页实例页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                这里演示
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">
+    正常情况：
+    &lt;a href="javascript:" class="active-btn"&gt;按下&lt;/a&gt;
+    包含JS：
+    &lt;a href="javascript:" id="button" class="active-btn"&gt;按下&lt;/a&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">
+    .active-btn {
+        display: inline-block; 
+        background-color: #cd0000;
+    }
+    .active-btn:active {
+        background-color: #ae0000;
+    }</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JavaScript：</h5>
+    <pre name="code" class="js">
+    var button = document.getElementById("button");
+    if (button.addEventListener) {
+        button.addEventListener("mousedown", function(event) {
+            // 此处省略N行
+            event.preventDefault();    
+        });
+    }</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+</body>
+</html>
