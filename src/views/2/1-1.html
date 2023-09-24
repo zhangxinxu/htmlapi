@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>rel="noopener"与Web安全演示</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo a {
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>rel="noopener"与Web安全演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                请点击下面的链接：
+                <p>
+                    <a href="./target.html" target="_blank" rel="opener">目标页面</a>
+                </p>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">
+请点击下面的链接：
+&lt;p&gt;
+    &lt;a href="./target.html" target="_blank" rel="opener"&gt;目标页面&lt;/a&gt;
+&lt;/p&gt;
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>target.html页面的JS：</h5>
+    <pre name="code" class="js">const opener = window.opener;
+if (opener) {
+    opener.location.hash = '#hack';
+    opener.document.body.insertAdjacentHTML('beforeend', '&lt;span style="position:absolute;outline:solid red;font-size:100px;left:calc(50% - 2.5em);top:208px;"&gt;哈哈哈，💩&lt;/span&gt;');
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
