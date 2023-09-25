@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>rel="noreferrer"与页面访问来源</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .menu,
+        .remind,
+        .list {
+            width: 320px;
+            margin-inline: auto;
+            text-align: left;
+        }
+        .list {
+            height: 300px;
+            border: 1px solid gray;
+            overflow: auto;
+        }
+        .list .text {
+            height: 300px;
+            display: grid;
+            place-items: center;
+            color: gray;
+        }
+        .list li {
+            margin: 1rem .5rem;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>rel="noreferrer"与页面访问来源演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                <menu class="menu">
+                    <li>
+                        <a href="./home.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./1-2.html">列表页</a>
+                    </li>
+                </menu>
+                <p class="remind">测试方法：滚动下面的列表，然后分别前往首页和详情页，然后再返回这里，可以注意观察滚动位置是否记住。</p>
+                <div id="list" class="list">
+                    <ul>
+                        <li><a href="./detail.html">详情页</a></li>
+                        <li class="text">撑开高度，形成滚动</li>
+                        <li><a href="./detail.html">详情页</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>首页HTML：</h5>
+<pre name="code" class="html">&lt;a href="./1-2.html" rel="noreferrer"&gt;« 返回列表页&lt;/a&gt;</pre>
+<h5>详情页HTML：</h5>
+<pre name="code" class="html">&lt;a href="./1-2.html"&gt;« 返回列表页&lt;/a&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>本页HTML：</h5>
+<pre name="code" class="html">&lt;div id="list" class="list"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="./detail.html"&gt;详情页&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="text"&gt;撑开高度，形成滚动&lt;/li&gt;
+        &lt;li&gt;&lt;a href="./detail.html"&gt;详情页&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS代码：</h5>
+    <pre name="code" class="js">list.addEventListener('scroll', function() {
+    localStorage.listScroll = this.scrollTop;
+});
+
+if (/detail\.html/.test(document.referrer)) {
+    list.scrollTop = localStorage.listScroll;
+} else {
+    localStorage.listScroll = 0;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+list.addEventListener('scroll', function() {
+    localStorage.listScroll = this.scrollTop;
+});
+
+if (/detail\.html/.test(document.referrer)) {
+    list.scrollTop = localStorage.listScroll;
+} else {
+    localStorage.listScroll = 0;
+}
+</script>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
