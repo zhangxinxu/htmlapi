@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>download属性与图片下载</title>
+    <title>ping属性与数据上报</title>
     <link rel="import" href="../include/meta.html">
     <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Button.css">
     <style>
@@ -11,23 +11,24 @@
 <body>
     <link rel="import" href="../include/header.html">
     <div class="main">
-        <h1>download属性与图片下载演示页面</h1>
+        <h1>ping属性与数据上报演示页面</h1>
         <div class="show">
             <h3>展示</h3>
             <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
             <div class="demo">
 
-<a href="/assets/example.jpg" type="primary" class="ui-button" download="some-name.jpg">案例图片</a>   
+<a href="javascript:" type="primary" class="ui-button" ping="/assets/example.jpg?action=click&id=button1">按钮1</a>   
+<a href="javascript:" type="primary" class="ui-button" ping="/assets/example.jpg?action=click&id=button2">按钮2</a>   
 
-<p class="remind">// zxx: 看看点击按钮后是不是触发了图片下载？</p>
-
+<p class="remind">//zxx: 打开开发者工具，点击按钮，查看发送的网络请求</p>
             </div>
             <h3>代码</h3>
             <ul class="codes">
                 <li class="code_li">
                     <div class="code_x">
                         <h5>HTML：</h5>
-                        <pre name="code" class="html">&lt;a href="/assets/example.jpg" download="some-name.jpg"&gt;案例图片&lt;/a&gt;    </pre>
+                        <pre name="code" class="html">&lt;a href type="primary" class="ui-button" ping="/assets/example.jpg?action=click&amp;id=button1"&gt;按钮1&lt;/a&gt;   
+&lt;a href type="primary" class="ui-button" ping="/assets/example.jpg?action=click&amp;id=button2"&gt;按钮2&lt;/a&gt; </pre>
                     </div>
                 </li>
             </ul>
