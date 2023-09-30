@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>base元素影响ajax请求地址</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Button.css">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>base元素影响ajax请求地址演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<button type="primary" id="button" class="ui-button">请求图片 '/assets/example.jpg' </button>   
+
+<p id="output"></p>
+
+<p class="remind">//zxx: 打开开发者工具，点击按钮，查看网络请求</p>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+                        <pre name="code" class="html">&lt;base href="https://www.cssworld.cn/"&gt;
+&lt;button type="primary" id="button" class="ui-button"&gt;请求图片'/assets/example.jpg'&lt;/button&gt;
+
+&lt;p id="output"&gt;&lt;/p&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+                        <pre name="code" class="js">button.addEventListener('click', function () {
+    fetch('/assets/example.jpg').then(function (response) {
+        return response.blob();
+    }).then(function (blob) {
+        var img = document.createElement('img');
+        img.src = URL.createObjectURL(blob);
+        output.append('img');
+    }).catch(function (e) {
+        console.error(e);
+        output.className = 'error';
+        output.textContent = e.message;
+    });
+});</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+button.addEventListener('click', function () {
+    fetch('/assets/example.jpg').then(function (response) {
+        return response.blob();
+    }).then(function (blob) {
+        var img = document.createElement('img');
+        img.src = URL.createObjectURL(blob);
+        output.append('img');
+    }).catch(function (e) {
+        console.error(e);
+        output.className = 'error';
+        output.textContent = e.message;
+    });
+});
+</script>
+    <link rel="import" href="../include/footer.html">
+    <base href="https://www.cssworld.cn/">
+</body>
+</html>
