@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>area和map元素实现不规则点击区域</title>
+    <link rel="import" href="../include/meta.html">
+    <meta name="referrer" content="no-referrer">
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/variables.css">
+    <style>
+
+        
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>area和map元素实现不规则点击区域演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<p class="remind">//zxx: 鼠标经过饼图不同区域，看看链接是不是精准变化了？<br>或者点击不同区域，看看URL中的hash地址变化</p>
+
+<img src="https://image.zhangxinxu.com/image/blog/202310/pie.png" usemap="#pie" alt="饼图" width="202" height="202">
+
+<map id="pie" name="pie">
+    <!-- 三等分的饼图，起点是0角度 -->
+    <area shape="poly" coords="101,101,101,0,0,0,0,101,20,134" href="#html">
+    <area shape="poly" coords="101,101,101,0,202,0,202,101,180,134" href="#css">
+    <area shape="poly" coords="101,101,20,134,101,202,180,134" href="#js">
+</map>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML-Chrome only：</h5>
+                        <pre name="code" class="html">&lt;img src="pie.png" usemap="#pie" alt="饼图" width="202" height="202"&gt;
+
+&lt;map id="pie" name="pie"&gt;
+    &lt;area shape="poly" coords="101,101,101,0,0,0,0,101,20,134" href="#html"&gt;
+    &lt;area shape="poly" coords="101,101,101,0,202,0,202,101,180,134" href="#css"&gt;
+    &lt;area shape="poly" coords="101,101,20,134,101,202,180,134" href="#js"&gt;
+&lt;/map&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
