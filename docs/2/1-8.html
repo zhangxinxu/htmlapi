@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>area元素与链接的嵌套</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/variables.css">
+    <style>
+        .demo {
+            text-align: left;
+        }
+        .demo h4 {
+            margin: 1.5rem 0 .5rem;
+            max-width: 320px;
+            margin-inline: auto;
+        }
+        .layout {
+            display: flex;
+            max-width: 320px;
+            margin-inline: auto;
+            padding: .75rem;
+            color: inherit;
+            gap: .5rem;
+            background-color: #f5f5f5;
+        }
+        .layout:active {
+            background-color: #eee;
+        }
+        .avatar img {
+            display: block;
+            width: 80px; height: 80px;
+            object-fit: cover;
+            object-position: top;
+        }
+        .detail h4 {
+            margin: 0;
+        }
+        .detail p {
+            margin: 0;
+            color: gray;
+        }
+        .detail p + p {
+            margin-top: .5rem;
+        }
+        .link {
+            background-color: var(--ui-blue);
+            color: #fff;
+            display: inline-block;
+            position: relative;
+            line-height: 1.375;
+        }
+        .link area {
+            position: absolute;
+            inset: 0;
+        }
+        .area {
+            width: 100%; height: 100%;
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <base target="_blank">
+    <div class="main">
+        <h1>area元素与链接的嵌套演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>Chrome Only实现</h4>
+<a href="./intro-person.html" class="layout">
+    <div class="avatar">
+        <img src="/assets/myself.jpg" alt="示例图片">
+    </div>
+    <div class="detail">
+        <p>张鑫旭，09年华中科技大学毕业，就职于阅文集团，专注web前端偏前领域，著有<span class="link"><area href="./intro-book.html">“CSS世界”三部曲</span>、<span class="link"><area href="./intro-book.html">你并不精通HTML</span></p>
+        <p>查看更多 »</p>
+    </div>
+</a>
+
+<h4>全兼容实现</h4>
+<a href="./intro-person.html" class="layout">
+    <div class="avatar">
+        <img src="/assets/myself.jpg" alt="示例图片">
+    </div>
+    <div class="detail">
+        <p>张鑫旭，09年华中科技大学毕业，就职于阅文集团，专注web前端偏前领域，著有<span class="link">
+            <img class="area" usemap="#introBook">
+            “CSS世界”三部曲
+        </span>、<span class="link">
+            <img class="area" usemap="#introBook">
+            你并不精通HTML
+        </span></p>
+        <p>查看更多 »</p>
+    </div>
+    <!-- map位置任意 -->
+    <map id="introBook" name="introBook">
+        <area shape="rect" coords="0,0,9999,9999" href="./intro-book.html">
+    </map>
+</a>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML-Chrome only：</h5>
+                        <pre name="code" class="html">&lt;a href="./intro-person.html" class="layout"&gt;
+    &lt;div class="avatar"&gt;
+        &lt;img src="/assets/myself.jpg" alt="示例图片"&gt;
+    &lt;/div&gt;
+    &lt;div class="detail"&gt;
+        &lt;p&gt;...著有&lt;span class="link"&gt;
+            &lt;area href="./intro-book.html"&gt;
+            “CSS世界”三部曲
+        &lt;/span&gt;、&lt;span class="link"&gt;
+            &lt;area href="./intro-book.html"&gt;
+            你并不精通HTML
+        &lt;/span&gt;&lt;/p&gt;
+        &lt;p&gt;查看更多 »&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/a&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML-兼容实现：</h5>
+                        <pre name="code" class="html">&lt;a href="./intro-person.html" class="layout"&gt;
+    &lt;div class="avatar"&gt;
+        &lt;img src="/assets/myself.jpg" alt="示例图片"&gt;
+    &lt;/div&gt;
+    &lt;div class="detail"&gt;
+        &lt;p&gt;...著有&lt;span class="link"&gt;
+            &lt;img class="area" usemap="#introBook"&gt;
+            “CSS世界”三部曲
+        &lt;/span&gt;、&lt;span class="link"&gt;
+            &lt;img class="area" usemap="#introBook"&gt;
+            你并不精通HTML
+        &lt;/span&gt;&lt;/p&gt;
+        &lt;p&gt;查看更多 »&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;!-- map位置任意 --&gt;
+    &lt;map id="introBook" name="introBook"&gt;
+        &lt;area shape="rect" coords="0,0,9999,9999" href="./intro-book.html"&gt;
+    &lt;/map&gt;
+&lt;/a&gt;</pre>
+                    </div>
+                </li>
+                <li>
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+                        <pre name="code" class="css">.layout {
+    display: flex;
+    max-width: 320px;
+    margin-inline: auto;
+    padding: .75rem;
+    color: inherit;
+    gap: .5rem;
+    background-color: #f5f5f5;
+}
+.layout:active {
+    background-color: #eee;
+}
+.avatar img {
+    display: block;
+    width: 80px; height: 80px;
+    object-fit: cover;
+    object-position: top;
+}
+.link {
+    background-color: var(--ui-blue);
+    color: #fff;
+    display: inline-block;
+    position: relative;
+    line-height: 1.375;
+}
+.link area {
+    position: absolute;
+    inset: 0;
+}
+.area {
+    width: 100%; height: 100%;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}</pre>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+
+</script>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
