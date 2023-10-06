@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>details元素默认样式效果</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <style>
+        .demo {
+            width: fit-content;
+            margin-inline: auto;
+            text-align: start;
+        }
+        details {
+            margin-block: 1.5em;
+            outline: 1px dotted;
+            outline-offset: .5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>details元素默认样式效果演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<details>
+    <summary>这是摘要1</summary>
+    <p>这里具体描述，标签相对随意，例如这里使用的&lt;p&gt;标签。</p>
+</details>
+
+<details open>
+    <summary>这是摘要2</summary>
+    <content>这里&lt;details&gt;标签设置了HTML布尔属性open，因此，默认是展开状态。</content>
+</details>
+
+<details open>
+    <p>如果&lt;summary&gt;缺省，则会自动补上。</p>
+</details>
+
+<details open>
+    <summary hidden></summary>
+    <p>如果&lt;summary&gt;缺省，则会自动补上。</p>
+</details>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;details&gt;
+    &lt;summary&gt;这是摘要1&lt;/summary&gt;
+    &lt;p&gt;这里具体描述，标签相对随意，例如这里使用的&amp;lt;p&amp;gt;标签。&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details open&gt;
+    &lt;summary&gt;这是摘要2&lt;/summary&gt;
+    &lt;content&gt;这里&amp;lt;details&amp;gt;标签设置了HTML布尔属性open，因此，默认是展开状态。&lt;/content&gt;
+&lt;/details&gt;
+
+&lt;details open&gt;
+    &lt;p&gt;如果&amp;lt;summary&amp;gt;缺省，则会自动补上。&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details open&gt;
+    &lt;summary hidden&gt;&lt;/summary&gt;
+    &lt;p&gt;如果&amp;lt;summary&amp;gt;缺省，则会自动补上。&lt;/p&gt;
+&lt;/details&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
