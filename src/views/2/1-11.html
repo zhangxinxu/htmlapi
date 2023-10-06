@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>body元素overflow:hidden失效</title>
+    <style>.abs { position: absolute; color: #fff; }</style>
+    <style>
+body {
+    height: 30px;
+    border: solid;
+    overflow: hidden;
+}
+body > div {
+    height: 300px;
+    background-color: brown;
+}
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
