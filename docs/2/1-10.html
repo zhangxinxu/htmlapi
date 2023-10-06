@@ -4,14 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>body元素高度0但背景色全屏</title>
-    <style>span { position: absolute; color: #fff; }</style>
+    <style>.abs { position: absolute; color: #fff; }</style>
     <style>
         body {
             background-color: #000;
         }
+        body.gradient {
+            background-image: linear-gradient(to bottom, #000, skyblue);
+        }
+        html.gradient {
+            background-image: linear-gradient(to bottom, #333, #666);
+        }
+        body.gradient button:first-child {
+            color: #0057c3;
+        }
+        html.gradient button:nth-child(2) {
+            color: #0057c3;
+        }
+        .height button:nth-child(3) {
+            color: #0057c3;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .height {
+            height: 100px;
+        }
     </style>
 </head>
 <body>
-    <span>body元素高度0但背景色全屏</span>
+    <div class="abs">body元素高度0但背景色全屏
+        <p>
+            <button onclick="document.body.classList.toggle('gradient')">设置或取消&lt;body&gt;线性渐变</button>
+            <button onclick="document.documentElement.classList.toggle('gradient')">设置或取消&lt;html&gt;深色渐变</button>
+            <button onclick="document.documentElement.classList.toggle('height')">设置或取消&lt;html&gt; 100px高</button>
+        </p>
+    </div>
 </body>
 </html>
