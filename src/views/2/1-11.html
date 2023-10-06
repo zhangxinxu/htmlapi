@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>body元素overflow:hidden失效</title>
-    <style>.abs { position: absolute; color: #fff; }</style>
     <style>
 body {
     height: 50px;
@@ -15,9 +14,32 @@ body > div {
     height: 150px;
     background-color: brown;
 }
+
+button {
+    font-size: 14px;
+    padding: 5px 10px;
+}
     </style>
 </head>
 <body>
     <div></div>
+    <p>
+        <button id="button">给html设置overflow:hidden</button>
+    </p>
+    <script>
+        var div = document.querySelector('div');
+        var p = document.querySelector('p');
+        button.onclick = function () {
+            if (/设置/.test(this.textContent)) {
+                document.documentElement.style.overflow = 'hidden';
+                this.textContent = '取消html的overflow:hidden';
+                div.appendChild(this);
+            } else {
+                document.documentElement.style.overflow = '';
+                this.textContent = '给html设置overflow:hidden';
+                p.appendChild(this);
+            }
+        };
+    </script>
 </body>
 </html>
