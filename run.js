@@ -301,7 +301,14 @@ fs.watch(pathSrcHTML, {
         task.assets.home();
     } else {
         timerHTML = setTimeout(() => {
-            task.html.init();
+			const fullPath = path.join(pathSrcHTML, filename);
+			if (/include/.test(fullPath)) {
+				task.html.init();
+			} else {
+				dir = filename.split(/\/|\\/)[0];
+				compile(path.join(pathSrcHTML, dir), path.join(pathDistHTML, dir));
+			}
+             
             console.log('HTML编译执行...');
         }, 100);
     }
