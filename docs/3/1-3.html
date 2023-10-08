@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>details/summary元素实际使用案例</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+<style>
+.demo {
+    width: fit-content;
+    margin-inline: auto;
+    text-align: start;
+}
+.demo h4 ~ h4 {
+    margin-top: 3em;
+}
+
+/* 公用样式 */
+details {
+    --icon-arrow: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath d='M472.064 272.448L72.832 671.68c-22.08 22.08-22.08 57.792 0 79.872 22.016 22.016 57.792 22.08 79.872 0L512 392.256l359.296 359.296c22.016 22.016 57.792 22.08 79.872 0s22.016-57.792 0-79.872L551.936 272.448c-22.08-22.016-57.792-22.016-79.872 0z' fill='%238a8a8a'/%3E%3C/svg%3E");
+}
+summary::marker {
+    font-size: 0;
+}
+
+/* 案例1 */
+.bar {
+    background-color: #f0f0f0;
+    color: #888;
+    padding-left: 40px;
+}
+.details-1 summary {
+    display: inline-block;
+    padding: 5px 28px;
+    text-indent: -15px;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+}
+.details-1 summary::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    margin: 4px 0 0 .5ch;
+    background: var(--icon-arrow) no-repeat center / 12px 12px;
+    transition: transform .2s;
+}
+.details-1[open] summary,
+.details-1 summary:hover {
+    background-color: #fff;
+    box-shadow: inset 1px 0 #ddd, inset -1px 0 #ddd;
+}
+.details-1[open] summary::after {
+    transform: rotate(180deg);
+}
+.details-1[open] summary::before {
+    content: '';
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+}
+
+.menu {
+	position: absolute;
+	border: 1px solid #ddd;
+    border-top: 0;
+	background-color: #fff;
+	min-width: 100px;
+	padding: 5px 0;
+    z-index: 1;
+}
+.menu {
+    list-style: none;
+    margin: 0;
+}
+.menu a {
+    display: block;
+    padding: 5px 10px;
+    color: inherit;
+}
+.menu a:hover {
+    background-color: #f0f0f0;
+}
+.menu sup {
+    position: absolute;
+    color: #cd0000;
+    font-size: 12px;
+    margin-top: -.25em;
+}
+
+/* 案例2 */
+dt {
+	font-weight: bold;
+}
+dt::after {
+	content: '';
+	position: absolute;
+	width: 12px; height: 12px;
+	margin: 4px 0 0 .5ch;
+	background: var(--icon-arrow) no-repeat;
+	background-size: 100% 100%;
+	transition: transform .2s;
+}
+[open] dt::after {
+	transform: rotate(90deg);
+}
+summary:has(dt) {
+    display: flex;
+}
+aside {
+    width: fit-content;
+    min-width: 5em;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+aside details:where(:not(:first-child)) {
+    margin-top: .5em;
+}
+aside details a {
+    display: block;
+    color: #666;
+}
+
+/* 案例3 */
+.details-3,
+.details-3 details {
+    padding-left: 20px;
+}
+.details-3 summary::before {
+    content: '';
+	display: inline-block;
+	width: 12px; height: 12px;
+	border: 1px solid #999;
+	background: linear-gradient(to right, #999, #999) no-repeat center, linear-gradient(to top, #999, #999) no-repeat center;
+	background-size: 2px 10px, 10px 2px;
+	vertical-align: -2px;
+	margin-right: 6px;
+	margin-left: -20px;
+}
+:is([open].details-3, .details-3 [open]) > summary::before {
+	background: linear-gradient(to right, #999, #999) no-repeat center;
+	background-size: 10px 2px;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>details/summary元素使用案例演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>1. 悬浮菜单，自定义下拉效果</h4>
+<div class="bar">
+    <details class="details-1">
+        <summary>我的消息</summary> 
+        <menu class="menu">
+            <li><a href>我的回答<sup>12</sup></a></li>
+            <li><a href>我的私信</a></li>
+            <li><a href>未评价订单<sup>2</sup></a></li>
+            <li><a href>我的关注</a></li>
+        </menu>
+    </details>
+</div>
+<p class="remind">这里放一段文字表明上面的是悬浮效果。</p>
+
+<h4>2. 多项菜单折叠效果</h4>
+<aside>
+    <details open>
+        <summary><dt>订单中心</dt></summary> 
+        <dd><a href>我的订单</a></dd>
+        <dd><a href>我的活动</a></dd>
+        <dd><a href>评价晒单</a></dd>
+        <dd><a href>购物助手</a></dd>
+    </details>
+    <details open>
+        <summary><dt>关注中心</dt></summary> 
+        <dd><a href>关注的商品</a></dd>
+        <dd><a href>关注的店铺</a></dd>
+        <dd><a href>关注的专辑</a></dd>
+        <dd><a href>收藏的内容</a></dd>
+    </details>
+    <details open>
+        <summary><dt>资产中心</dt></summary> 
+        <dd><a href>余额</a></dd>
+        <dd><a href>优惠券</a></dd>
+        <dd><a href>礼品卡</a></dd>
+    </details>
+</aside>
+
+<h4>3. 多级嵌套的树形菜单效果</h4>
+<details class="details-3">
+    <summary>我的文档</summary>
+    <details>
+        <summary>你并不精通HTML-正文</summary>
+        <div>第1章.docx</div>
+        <div>第2章.docx</div>
+        <div>第3章.docx</div>
+        <div>第4章.docx</div>
+        <div>第5章.docx</div>
+        <div>第6章.docx</div>
+        <div>第7章.docx</div>
+        <div>第8章.docx</div>
+        <div>第9章.docx</div>
+        <div>第10章.docx</div>
+    </details>
+    <details>
+        <summary>审批阶段</summary>
+        <div>选题申报.doc</div>
+        <div>选题申报-已完成-预览.pdf</div>
+    </details>
+    <div>备忘.txt</div>
+    <div>html编码规范2.2.doc</div>
+</details>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;1. 悬浮菜单，自定义下拉效果&lt;/h4&gt;
+&lt;div class="bar"&gt;
+    &lt;details class="details-1"&gt;
+        &lt;summary&gt;我的消息&lt;/summary&gt; 
+        &lt;menu class="menu"&gt;
+            &lt;li&gt;&lt;a href&gt;我的回答&lt;sup&gt;12&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href&gt;我的私信&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href&gt;未评价订单&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href&gt;我的关注&lt;/a&gt;&lt;/li&gt;
+        &lt;/menu&gt;
+    &lt;/details&gt;
+&lt;/div&gt;
+&lt;p class="remind"&gt;这里放一段文字表明上面的是悬浮效果。&lt;/p&gt;
+
+&lt;h4&gt;2. 多项菜单折叠效果&lt;/h4&gt;
+&lt;aside&gt;
+    &lt;details open&gt;
+        &lt;summary&gt;&lt;dt&gt;订单中心&lt;/dt&gt;&lt;/summary&gt; 
+        &lt;dd&gt;&lt;a href&gt;我的订单&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;我的活动&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;评价晒单&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;购物助手&lt;/a&gt;&lt;/dd&gt;
+    &lt;/details&gt;
+    &lt;details open&gt;
+        &lt;summary&gt;&lt;dt&gt;关注中心&lt;/dt&gt;&lt;/summary&gt; 
+        &lt;dd&gt;&lt;a href&gt;关注的商品&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;关注的店铺&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;关注的专辑&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;收藏的内容&lt;/a&gt;&lt;/dd&gt;
+    &lt;/details&gt;
+    &lt;details open&gt;
+        &lt;summary&gt;&lt;dt&gt;资产中心&lt;/dt&gt;&lt;/summary&gt; 
+        &lt;dd&gt;&lt;a href&gt;余额&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;优惠券&lt;/a&gt;&lt;/dd&gt;
+        &lt;dd&gt;&lt;a href&gt;礼品卡&lt;/a&gt;&lt;/dd&gt;
+    &lt;/details&gt;
+&lt;/aside&gt;
+
+&lt;h4&gt;3. 多级嵌套的树形菜单效果&lt;/h4&gt;
+&lt;details class="details-3"&gt;
+    &lt;summary&gt;我的文档&lt;/summary&gt;
+    &lt;details&gt;
+        &lt;summary&gt;你并不精通HTML-正文&lt;/summary&gt;
+        &lt;div&gt;第1章.docx&lt;/div&gt;
+        &lt;div&gt;第2章.docx&lt;/div&gt;
+        &lt;div&gt;第3章.docx&lt;/div&gt;
+        &lt;div&gt;第4章.docx&lt;/div&gt;
+        &lt;div&gt;第5章.docx&lt;/div&gt;
+        &lt;div&gt;第6章.docx&lt;/div&gt;
+        &lt;div&gt;第7章.docx&lt;/div&gt;
+        &lt;div&gt;第8章.docx&lt;/div&gt;
+        &lt;div&gt;第9章.docx&lt;/div&gt;
+        &lt;div&gt;第10章.docx&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;details&gt;
+        &lt;summary&gt;审批阶段&lt;/summary&gt;
+        &lt;div&gt;选题申报.doc&lt;/div&gt;
+        &lt;div&gt;选题申报-已完成-预览.pdf&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;div&gt;备忘.txt&lt;/div&gt;
+    &lt;div&gt;html编码规范2.2.doc&lt;/div&gt;
+&lt;/details&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">/* 公用样式 */
+details {
+    --icon-arrow: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cpath d='M472.064 272.448L72.832 671.68c-22.08 22.08-22.08 57.792 0 79.872 22.016 22.016 57.792 22.08 79.872 0L512 392.256l359.296 359.296c22.016 22.016 57.792 22.08 79.872 0s22.016-57.792 0-79.872L551.936 272.448c-22.08-22.016-57.792-22.016-79.872 0z' fill='%238a8a8a'/%3E%3C/svg%3E");
+}
+summary::marker {
+    font-size: 0;
+}
+
+/* 案例1 */
+.bar {
+    background-color: #f0f0f0;
+    color: #888;
+    padding-left: 40px;
+}
+.details-1 summary {
+    display: inline-block;
+    padding: 5px 28px;
+    text-indent: -15px;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+}
+.details-1 summary::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    margin: 4px 0 0 .5ch;
+    background: var(--icon-arrow) no-repeat center / 12px 12px;
+    transition: transform .2s;
+}
+.details-1[open] summary,
+.details-1 summary:hover {
+    background-color: #fff;
+    box-shadow: inset 1px 0 #ddd, inset -1px 0 #ddd;
+}
+.details-1[open] summary::after {
+    transform: rotate(180deg);
+}
+.details-1[open] summary::before {
+    content: '';
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+}
+
+/* 案例2 */
+dt {
+    font-weight: bold;
+}
+dt::after {
+    content: '';
+    position: absolute;
+    width: 12px; height: 12px;
+    margin: 4px 0 0 .5ch;
+    background: var(--icon-arrow) no-repeat;
+    background-size: 100% 100%;
+    transition: transform .2s;
+}
+[open] dt::after {
+    transform: rotate(90deg);
+}
+summary:has(dt) {
+    display: flex;
+}
+aside {
+    width: fit-content;
+    min-width: 5em;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+aside details:where(:not(:first-child)) {
+    margin-top: .5em;
+}
+aside details a {
+    display: block;
+    color: #666;
+}
+
+/* 案例3 */
+.details-3,
+.details-3 details {
+    padding-left: 20px;
+}
+.details-3 summary::before {
+    content: '';
+    display: inline-block;
+    width: 12px; height: 12px;
+    border: 1px solid #999;
+    background: linear-gradient(#999, #999) no-repeat center, linear-gradient(#999, #999) no-repeat center;
+    background-size: 2px 10px, 10px 2px;
+    vertical-align: -2px;
+    margin-right: 6px;
+    margin-left: -20px;
+}
+:is([open].details-3, .details-3 [open]) &gt; summary::before {
+    background: linear-gradient(#999, #999) no-repeat center;
+    background-size: 10px 2px;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
