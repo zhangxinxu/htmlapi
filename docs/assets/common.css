@@ -47,6 +47,26 @@ table{width:100%;background:#a0b3d6; font-size:12px; border-spacing: 1px;}
 th{border:3px solid #fff; background:#f0f3f9; text-align:center;}
 td{padding:2px 4px; border:3px solid #fff; background:#f9f9f9;}
 tr:hover{opacity:0.95; filter:Alpha(opacity=95);}
+.button {
+    padding: 10px 20px;
+    border: 1px solid #2a80eb;
+    border-radius: 4px;
+    background-color: #2a80eb;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s;
+}
+.button:hover {
+    filter: brightness(1.1);
+}
+.button.normal {
+    border: 1px solid #d0d0d5;
+    background-color: #f0f0f5;
+    color: #333;
+}
+.button + .button {
+    margin-left: 8px;
+}
 
 .remind{color:gray;font-size:12px;}
 

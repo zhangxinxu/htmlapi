@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>dialog元素的returnValue</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+<style>
+.demo {
+    width: fit-content;
+    margin-inline: auto;
+    text-align: start;
+    padding-bottom: 180px;
+}
+.demo h4 ~ h4 {
+    margin-top: 3em;
+}
+dialog {
+    z-index: 1;
+    width: 360px;
+    max-width: calc(100% - 2rem);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .1);
+    border: 1px solid #0003;
+    margin-top: 12px;
+}
+dialog form {
+    text-align: right;
+}
+dialog input {
+    padding: 8px 10px;
+    line-height: 20px;
+    border: 1px solid #d0d0d5;
+    border-radius: 4px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: stretch;
+    outline: none;
+}
+dialog input:focus {
+    border-color: #2a80eb;
+}
+/* p:has(+ [open]) {
+    visibility: hidden;
+} */
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>dialog元素表单提交自动关闭演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<button class="button" onclick="dialog.show();">点击显示弹框</button>
+<p><output id="output">&nbsp;</output></p>
+<dialog id="dialog">
+    <form id="form">
+        <p><input placeholder="请输入姓名" required /></p>
+    </form>
+    <form>
+        <button class="button" form="form">确定</button>
+        <button class="button normal" formmethod="dialog" value="cancel">取消</button>
+    </form>
+</dialog>
+
+
+<script>
+form.addEventListener('submit', function (event) {
+   event.preventDefault();
+   dialog.close('submit');
+});
+dialog.addEventListener('close', () => {
+   output.textContent = 'returnValue: ' + dialog.returnValue;
+});
+</script>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;button class="button" onclick="dialog.show();"&gt;点击显示弹框&lt;/button&gt;
+&lt;p&gt;&lt;output id="output"&gt;&amp;nbsp;&lt;/output&gt;&lt;/p&gt;
+&lt;dialog id="dialog"&gt;
+    &lt;form id="form"&gt;
+        &lt;p&gt;&lt;input placeholder="请输入姓名" required /&gt;&lt;/p&gt;
+    &lt;/form&gt;
+    &lt;form&gt;
+        &lt;button class="button" form="form"&gt;确定&lt;/button&gt;
+        &lt;button class="button normal" formmethod="dialog" value="cancel"&gt;取消&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/dialog&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">form.addEventListener('submit', function (event) {
+   event.preventDefault();
+   dialog.close('submit');
+});
+dialog.addEventListener('close', () =&gt; {
+   output.textContent = 'returnValue: ' + dialog.returnValue;
+});</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
