@@ -79,20 +79,20 @@ tr:hover{opacity:0.95; filter:Alpha(opacity=95);}
 .code_li:first-child:before {border-left:0;}
 .code_li:hover:before{background-color:#fafafc;}
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
    .col3 > li{float:none;width:auto;}
 }
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
    .col2 > li{float:none;width:auto;}
    .logo{background-position:20px 50%;}
    .show > h3,.code_x{padding-left: 20px;}
 }
-@media screen and (max-width: 640px) {
+@media (max-width: 640px) {
 	.header, .logo {
 		height: 48px;
 	}
 	.logo {
-		background-size:128px 25px;
+		background-size: 128px 25px;
 	}
 	.main > h1 {
 		font-size:  16px;
@@ -101,6 +101,9 @@ tr:hover{opacity:0.95; filter:Alpha(opacity=95);}
 	.remind {
 		margin-left:1rem; margin-right:1rem;
 	}
+    .codes {
+        flex-direction: column;
+    }
 }
 
 @media print {

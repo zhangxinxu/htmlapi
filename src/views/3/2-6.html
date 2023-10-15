@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>使用popover属性模拟下拉弹层</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://qidian.gtimg.com/lulu/hope/ui/ui.css">
+<style>
+.demo {
+    height: 200px;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    text-align: start;
+}
+
+.ui-select {
+    position: relative;
+}
+.ui-select button {
+    position: absolute;
+    opacity: 0;
+}
+ui-popup-container {
+    inset-inline: 1rem;
+    bottom: 0;
+    border: 0;
+    --ui-popup-radius: 1rem;
+    --ui-space: .75rem 1rem;
+}
+ui-popup-container::backdrop {
+    background-color: #0007;
+}
+ui-popup-container:popover-open {
+    transform: translate(0, 0);
+}
+
+:is(html, body):has(:popover-open) {
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使用popover属性模拟下拉弹层演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<div class="ui-select">
+    <button is="ui-select" popovertarget="selectPopover">点击我</button>
+    <select is="ui-select" popup>
+        <option>请选择</option>
+        <option>选项1</option>
+        <option>选项2</option>
+    </select>
+</div>
+
+<ui-popup-container id="selectPopover" popover>
+    <form id="form">
+        <ui-list-item><input type="radio" name="n1" value="请选择" checked data-index="0">请选择</ui-list-item>
+        <ui-list-item><input type="radio" name="n1" value="选项1" data-index="1">选项1</ui-list-item>
+        <ui-list-item><input type="radio" name="n1" value="选项2" data-index="2">选项2</ui-list-item>
+    </form>
+</ui-popup-container>
+
+<script>
+form.onchange = function () {
+    const input = form.querySelector('input:checked');
+    const select = document.querySelector('select');
+    select.selectedIndex = input.dataset.index;
+    select.dispatchEvent(new Event('change'));
+    // 关闭弹层
+    selectPopover.hidePopover();
+}
+</script>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;div class="ui-select"&gt;
+    &lt;button is="ui-select" popovertarget="selectPopover"&gt;点击我&lt;/button&gt;
+    &lt;select is="ui-select" popup&gt;
+        &lt;option&gt;请选择&lt;/option&gt;
+        &lt;option&gt;选项1&lt;/option&gt;
+        &lt;option&gt;选项2&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;ui-popup-container id="selectPopover" popover&gt;
+    &lt;form id="form"&gt;
+        &lt;ui-list-item&gt;&lt;input type="radio" name="n1" value="请选择" checked data-index="0"&gt;请选择&lt;/ui-list-item&gt;
+        &lt;ui-list-item&gt;&lt;input type="radio" name="n1" value="选项1" data-index="1"&gt;选项1&lt;/ui-list-item&gt;
+        &lt;ui-list-item&gt;&lt;input type="radio" name="n1" value="选项2" data-index="2"&gt;选项2&lt;/ui-list-item&gt;
+    &lt;/form&gt;
+&lt;/ui-popup-container&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">form.onchange = function () {
+    const input = form.querySelector('input:checked');
+    const select = document.querySelector('select');
+    select.selectedIndex = input.dataset.index;
+    select.dispatchEvent(new Event('change'));
+    // 关闭弹层
+    selectPopover.hidePopover();
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
