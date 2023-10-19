@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>label元素与表单控件元素</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://qidian.gtimg.com/lulu/hope/ui/ui.css">
+<style>
+.demo {
+    height: 200px;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    text-align: start;
+}
+
+form > div {
+    margin-block: .5em;
+}
+form > p {
+    padding-left: 3em;
+}
+
+[type="number"] {
+    width: 3em;
+}
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使用popover属性模拟下拉弹层演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<form>
+  <div>
+    <label for="email">邮箱：</label>
+    <input type="email" id="email">
+  </div>
+  <div>
+    <label for="password">密码：</label>
+    <input type="password" id="password">
+  </div>
+  <p>
+    <input type="checkbox" id="agree">
+    <label for="agree">我已阅读用户协议</label>
+  </p>
+</form>
+<h4>output元素的for属性</h4>
+<p>
+    <input type="number" id="price" value="50" placehoplder="单价"> 
+    x 
+    <input type="number" id="amount" value="2" placehoplder="数量"> 
+    = 
+    <output for="price amount">100</output>
+</p>
+<script>
+console.log(document.querySelector('label').for);
+console.log(document.querySelector('label').htmlFor);
+console.log(document.querySelector('output').htmlFor);
+
+</script>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;form&gt;
+  &lt;div&gt;
+    &lt;label for="email"&gt;邮箱：&lt;/label&gt;
+    &lt;input type="email" id="email"&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;label for="password"&gt;密码：&lt;/label&gt;
+    &lt;input type="password" id="password"&gt;
+  &lt;/div&gt;
+  &lt;p&gt;
+    &lt;input type="checkbox" id="agree"&gt;
+    &lt;label for="agree"&gt;我已阅读用户协议&lt;/label&gt;
+  &lt;/p&gt;
+&lt;/form&gt;</pre>
+
+&lt;h4&gt;output元素的for属性&lt;/h4&gt;
+&lt;p&gt;
+    &lt;input type="number" id="price" value="50" placehoplder="单价"&gt; 
+    x 
+    &lt;input type="number" id="amount" value="2" placehoplder="数量"&gt; 
+    = 
+    &lt;output for="price amount"&gt;100&lt;/output&gt;
+&lt;/p&gt;
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">console.log(document.querySelector('label').for);
+console.log(document.querySelector('label').htmlFor);
+
+console.log(document.querySelector('output').htmlFor);</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
