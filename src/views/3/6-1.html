@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>meter元素与密码强度效果</title>
+    <link rel="import" href="../include/meta.html">
+<style>
+.demo {
+    padding-block: 40px;
+}
+meter:in-range ~ output::before {
+    content: '一般';
+}
+meter:out-of-range ~ output::before {
+    content: '弱';
+}
+/* 
+::-webkit-meter-inner-element
+::-webkit-meter-bar
+::-webkit-meter-even-less-good-value
+::-webkit-meter-optimum-value
+::-webkit-meter-suboptimum-value */
+
+meter {
+    width: 120px;
+    border: 0; /* Safari */
+    position: relative;
+    --gradient: linear-gradient(to right, red 39px, transparent 0 41px, orange 0 79px, transparent 0 81px, green 0);
+}
+meter::after {
+    content: '弱 中 强 aaaaaaaaaaaaaaaaaaaaaa';
+    position: absolute;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    left: calc(20px - .5em);
+    right: calc(20px - .5em);
+    text-align: justify;
+    -webkit-text-fill-color: transparent;
+    background: var(--gradient) calc(.5em - 20px) / 120px;
+    -webkit-background-clip: text;
+}
+::-webkit-meter-bar {
+    height: 12px;
+    width: 120px;
+    /* border-radius: 0; */
+    border: 0;
+    background: #eee;
+    -webkit-mask: var(--gradient);
+    mask: var(--gradient);
+}
+_::-moz-meter-bar,
+meter {
+    height: 12px;
+    width: 120px;
+    background: #eee;
+    /* border: 1px solid deepskyblue;
+    
+    appearance: none; */
+}
+::-webkit-meter-even-less-good-value {
+    background: red;
+}
+::-webkit-meter-suboptimum-value {
+    background: linear-gradient(to right, red 40px, orange 0);
+}
+::-webkit-meter-optimum-value {
+    background: linear-gradient(to right, red 40px, orange 0 80px, green 0);
+}
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>meter元素与密码强度效果演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+密码：<input id="pwd" type="password">
+<meter id="meter" min="0" max="12" low="4" high="8" optimum="10" value="0"></meter>
+<output></output>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+<script>
+    pwd.addEventListener('input', function () {
+        var value = this.value;
+        meter.value = zxcvbn(value).guesses_log10;
+    });
+</script>  
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">密码：&lt;input id="pwd" type="password"&gt;
+&lt;meter id="meter" min="0" max="12" low="4" high="8" optimum="10" value="0"&gt;&lt;/meter&gt;
+&lt;output&gt;&lt;/output&gt;
+
+&lt;script src="https://cdn.bootcdn.net/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    pwd.addEventListener('input', function () {
+        var value = this.value;
+        meter.value = zxcvbn(value).guesses_log10;
+    });
+&lt;/script&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">meter:in-range ~ output::before {
+    content: '一般';
+}
+meter:out-of-range ~ output::before {
+    content: '弱';
+}
+
+meter {
+    width: 120px;
+    border: 0; /* Safari */
+    position: relative;
+    --gradient: linear-gradient(to right, red 39px, transparent 0 41px, orange 0 79px, transparent 0 81px, green 0);
+}
+meter::after {
+    content: '弱 中 强 aaaaaaaaaaaaaaaaaaaaaa';
+    position: absolute;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    left: calc(20px - .5em);
+    right: calc(20px - .5em);
+    text-align: justify;
+    -webkit-text-fill-color: transparent;
+    background: var(--gradient) calc(.5em - 20px) / 120px;
+    -webkit-background-clip: text;
+}
+::-webkit-meter-bar {
+    height: 12px;
+    width: 120px;
+    /* border-radius: 0; */
+    border: 0;
+    background: #eee;
+    -webkit-mask: var(--gradient);
+    mask: var(--gradient);
+}
+_::-moz-meter-bar,
+meter {
+    height: 12px;
+    width: 120px;
+    background: #eee;
+}
+::-webkit-meter-even-less-good-value {
+    background: red;
+}
+::-webkit-meter-suboptimum-value {
+    background: linear-gradient(to right, red 40px, orange 0);
+}
+::-webkit-meter-optimum-value {
+    background: linear-gradient(to right, red 40px, orange 0 80px, green 0);
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
