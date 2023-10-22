@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>progress元素的样式自定义</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+<style>
+.demo {
+    width: 360px;
+    margin-inline: auto;
+    text-align: start;
+}
+progress {
+    --theme-color: deepskyblue;
+    --track-color: aliceblue;
+
+    width: 160px; height: 14px;
+    border: 1px solid var(--theme-color);  
+    background-color:var(--track-color);
+}
+/* 不确定态样式 */
+progress:indeterminate {
+    background-image: linear-gradient(var(--theme-color), var(--theme-color));
+    background-size: 33% 100%;
+    background-repeat: no-repeat;
+    animation: progressIndeterminate 1s infinite linear alternate;
+}
+:indeterminate::-webkit-progress-bar {
+    background-color: transparent;
+}
+:indeterminate::-moz-progress-bar { 
+    background: none; 
+}
+
+@keyframes progressIndeterminate {
+    0% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+/* 确定态样式 */
+::-moz-progress-bar { 
+    background: var(--theme-color); 
+}
+::-webkit-progress-bar { 
+    background: var(--track-color); 
+}
+::-webkit-progress-value { 
+    background: var(--theme-color); 
+}
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>progress元素的样式自定义演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>不确定态</h4>
+<progress></progress>
+
+<h4>正常进度</h4>
+<label class="p" for="progress">上传进度：</label>
+<progress id="progress" value="50" max="100"></progress>
+<label for="progress">50</label>%
+<script>
+console.log(progress.labels);
+</script>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;不确定态&lt;/h4&gt;
+&lt;progress&gt;&lt;/progress&gt;
+
+&lt;h4&gt;正常进度&lt;/h4&gt;
+&lt;label class="p" for="progress"&gt;上传进度：&lt;/label&gt;
+&lt;progress id="progress" value="50" max="100"&gt;&lt;/progress&gt;
+&lt;label for="progress"&gt;50&lt;/label&gt;%
+&lt;script&gt;
+console.log(progress.labels);
+&lt;/script&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">progress {
+    --theme-color: deepskyblue;
+    --track-color: aliceblue;
+
+    width: 160px; height: 14px;
+    border: 1px solid var(--theme-color);  
+    background-color:var(--track-color);
+}
+/* 不确定态样式 */
+progress:indeterminate {
+    background-image: linear-gradient(var(--theme-color), var(--theme-color));
+    background-size: 33% 100%;
+    background-repeat: no-repeat;
+    animation: progressIndeterminate 1s infinite linear alternate;
+}
+:indeterminate::-webkit-progress-bar {
+    background-color: transparent;
+}
+:indeterminate::-moz-progress-bar { 
+    background: none; 
+}
+
+@keyframes progressIndeterminate {
+    0% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+/* 确定态样式 */
+::-moz-progress-bar { 
+    background: var(--theme-color); 
+}
+::-webkit-progress-bar { 
+    background: var(--track-color); 
+}
+::-webkit-progress-value { 
+    background: var(--theme-color); 
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
