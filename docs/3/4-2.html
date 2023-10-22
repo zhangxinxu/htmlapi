@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>fieldset元素禁用表单所有控件元素</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+<style>
+.demo {
+    width: 360px;
+    margin-inline: auto;
+    text-align: start;
+}
+.form {
+    padding: 16px;
+}
+.b {
+    font-weight: bold;
+}
+.pay {
+	padding: 5px 0 5px 100px;
+	margin: 16px 0;
+	background-color: #EDF3F5;
+	font-size: 14px;
+	font-weight: bold;
+}
+.list {
+    display: flow-root;
+    margin-top: 12px;
+}
+.left {
+    float: left;
+    width: 7em;
+}
+.cell {
+    overflow: hidden;
+}
+.red {
+    color: red;
+}
+.gray {
+    color: gray;
+    font-size: 12px;
+}
+form :is(input, select, textarea) {
+    font-size: 100%;
+}
+textarea {
+    height: 3em;
+    vertical-align: bottom;
+}
+form p {
+    margin: 8px 0 0;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>使用popover属性模拟下拉弹层演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<form class="form">
+    <fieldset disabled>
+        <legend class="b">完成您的购物订单</legend>
+        <div class="list">
+            <label class="left">手机号<span class="red abs">*</span></label>
+            <div class="cell">
+                <input type="tel" class="ui-input" name="tel" required>
+            </div>
+        </div>
+        <div class="list">
+            <span class="left">您的款式<span class="red abs">*</span></span>
+            <div class="cell">
+                <input type="radio" id="radioMale" name="type" value="488" checked><label class="ui-radio" for="radioMale"></label><label class="mr20 ml5" for="radioMale">男款</label>
+                <input type="radio" id="radioFemale" name="type" value="388" required><label class="ui-radio" for="radioFemale"></label><label for="radioFemale" class="ml5">女款</label>
+                <p id="radioMaleP" class="mt10 gray">男款每件488元</p>
+                <p id="radioFemaleP" class="mt10 gray" hidden>女款每件388元</p>
+            </div>
+        </div>
+        <div class="list">
+            <label class="left" for="number">购买数量<span class="red abs">*</span></label>
+            <div class="cell">
+                <input type="number" id="number" class="ui-input" min="1" max="10" size="5" value="1" required placeholder="直接输入数值">
+            </div>
+        </div>
+        <div class="list">
+            <label class="left">所在城市<span class="red abs">*</span></label>
+            <div class="cell">
+                <select id="citySelect" required>
+                    <option value="">请选择</option>
+                    <option value="10">深圳</option>
+                    <option value="5">上海</option>
+                    <option value="7">北京</option>
+                    <option value="8">成都</option>
+                    <option value="6">武汉</option>
+                </select>
+                <p class="mt10 dn">运费： <strong id="transPrice" class="red">0</strong> 元</p>
+            </div>
+        </div>
+        <div class="list">
+            <label class="left">给商家留言</label>
+            <div class="cell">
+                <div class="ui-textarea"><textarea name="message" rows="4" maxlength="200" placeholder="少于200字符"></textarea></div>
+            </div>
+        </div>
+        <div class="list">
+            <span class="left">&nbsp;</span>
+            <div class="cell">
+                <input type="checkbox" id="checkInsur" name="insurance" value="0.4"><label class="ui-checkbox" for="checkInsur"></label><label class="ml5" for="checkInsur">使用运费险0.4元</label>
+            </div>
+        </div>
+        <p class="pay">您总共需要支付 <strong id="total" class="red">0</strong> 元</p>
+        <div class="list mt15">
+            <span class="left">是否货到付款</span>
+            <div class="cell">
+                <input type="checkbox" id="switch" name="pay"><label class="ui-switch" for="switch"></label>
+            </div>
+        </div>
+        <div class="list mt15">
+            <label class="left" for="achieveDate">希望到货日期</label>
+            <div class="cell">
+                <span class="ui-input ui-date-input"><input type="date" id="achieveDate" name="achieve" value="2023-10-27"></span>
+                <small class="gray ml10">默认尽快发货</small>
+            </div>
+        </div>
+        <div class="list mt20">
+            <span class="left">&nbsp;</span>
+            <div class="cell">
+                <input type="submit" id="validateSubmit" class="ui-button ui-button-primary" value="提交">
+            </div>
+        </div>
+    </fieldset>
+</form>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;form&gt;
+    &lt;fieldset disabled&gt;
+        &lt;legend&gt;完成您的购物订单&lt;/legend&gt;
+        &lt;...&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">略...</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>

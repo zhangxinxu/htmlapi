@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>fieldset/legend与文字两侧边框实现</title>
+    <link rel="import" href="../include/meta.html">
+<style>
+.demo {
+    width: 300px;
+    margin-inline: auto;
+    text-align: start;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+}
+
+.center legend {
+    margin-inline: auto;
+}
+
+.hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+}
+.hr legend {
+    margin-inline: auto;
+}
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使用popover属性模拟下拉弹层演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>边框灰色</h4>
+<fieldset>
+    <legend>标题</legend>
+</fieldset>
+
+<h4>文字居中</h4>
+<fieldset class="center">
+    <legend>标题</legend>
+</fieldset>
+
+<h4>虚线分隔线</h4>
+<fieldset class="center hr">
+    <legend>分隔线</legend>
+</fieldset>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;边框灰色&lt;/h4&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt;标题&lt;/legend&gt;
+&lt;/fieldset&gt;
+
+&lt;h4&gt;文字居中&lt;/h4&gt;
+&lt;fieldset class="center"&gt;
+    &lt;legend&gt;标题&lt;/legend&gt;
+&lt;/fieldset&gt;
+
+&lt;h4&gt;虚线分隔线&lt;/h4&gt;
+&lt;fieldset class="center hr"&gt;
+    &lt;legend&gt;分隔线&lt;/legend&gt;
+&lt;/fieldset&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">fieldset {
+    border: 1px solid #ccc;
+}
+
+.center legend {
+    margin-inline: auto;
+}
+
+.hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+}
+.hr legend {
+    margin-inline: auto;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
