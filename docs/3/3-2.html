@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>label元素与单复选框选择技术</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <link rel="stylesheet" href="https://qidian.gtimg.com/lulu/hope/ui/ui.css">
+<style>
+.demo {
+   width: fit-content;
+   margin-inline: auto;
+   text-align: start;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    gap: 10px;
+}
+.flex label {
+    border: 2px solid #ccc;
+    border-radius: .5rem;
+    padding: .75rem;
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.flex label:has(:checked) {
+    border-color: #D7BA98;
+    background-color: #FFF6ED;
+    background-image: linear-gradient(-135deg, #D7BA98 0%, #D7BA98 18px, transparent 0);
+}
+.flex label:has(:checked)::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    width: 8px;
+    height: 3px;
+    color: white;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    transform: rotate(-45deg);
+}
+.flex label span {
+    display: block;
+    font-size: 28px;
+}
+.flex label span::first-letter {
+    font-size: 14px;
+}
+.flex label p {
+    margin: 4px 0 0;
+    color: gray;
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>使用popover属性模拟下拉弹层演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>充值金额</h4>
+<div class="flex">
+    <label class="recomm">
+        <input type="radio" name="money" value="150" checked hidden> 
+        <span>¥150</span>
+        <p>送15.00元</p>
+    </label>
+    <label>
+        <input type="radio" name="money" value="100" hidden> 
+        <span>¥100</span>
+        <p>送8.00元</p>
+    </label>
+    <label>
+        <input type="radio" name="money" value="50" hidden> 
+        <span>¥50</span>
+        <p>送0元</p>
+    </label>
+</div>
+
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;充值金额&lt;/h4&gt;
+&lt;div class="flex"&gt;
+    &lt;label class="recomm"&gt;
+        &lt;input type="radio" name="money" value="150" checked hidden&gt; 
+        &lt;span&gt;¥150&lt;/span&gt;
+        &lt;p&gt;送15.00元&lt;/p&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="money" value="100" hidden&gt; 
+        &lt;span&gt;¥100&lt;/span&gt;
+        &lt;p&gt;送8.00元&lt;/p&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="money" value="50" hidden&gt; 
+        &lt;span&gt;¥50&lt;/span&gt;
+        &lt;p&gt;送0元&lt;/p&gt;
+    &lt;/label&gt;
+&lt;/div&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">.flex {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    gap: 10px;
+}
+.flex label {
+    border: 2px solid #ccc;
+    border-radius: .5rem;
+    padding: .75rem;
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.flex label:has(:checked) {
+    border-color: #D7BA98;
+    background-color: #FFF6ED;
+    background-image: linear-gradient(-135deg, #D7BA98 0%, #D7BA98 18px, transparent 0);
+}
+.flex label:has(:checked)::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    width: 8px;
+    height: 3px;
+    color: white;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    transform: rotate(-45deg);
+}
+.flex label span {
+    display: block;
+    font-size: 28px;
+}
+.flex label span::first-letter {
+    font-size: 14px;
+}
+.flex label p {
+    margin: 4px 0 0;
+    color: gray;
+    font-size: 12px;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
