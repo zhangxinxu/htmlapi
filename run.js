@@ -298,7 +298,7 @@ fs.watch(pathSrcHTML, {
 
 
     if (filename == 'index.html') {
-        task.assets.home();
+        task.html.home();
     } else {
         timerHTML = setTimeout(() => {
 			const fullPath = path.join(pathSrcHTML, filename);
