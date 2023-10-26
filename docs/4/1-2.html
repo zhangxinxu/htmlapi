@@ -20,6 +20,11 @@
         body:has(.operate :checked) {
             color-scheme: dark;
         }
+        @media (prefers-color-scheme: light) {
+            h1 {
+                color: currentColor;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,7 +65,28 @@
                 <li class="code_li">
                     <div class="code_x">
                         <h5>HTML：</h5>
-    <pre name="code" class="html">&lt;meta name="color-scheme" content="dark light" /&gt;</pre>
+    <pre name="code" class="html">&lt;meta name="color-scheme" content="dark light" /&gt;
+
+&lt;h4&gt;看看这些表单控件的颜色……&lt;/h4&gt;
+&lt;form&gt;
+    &lt;p&gt;
+        &lt;span&gt;邮箱：&lt;/span&gt;
+        &lt;input type="email"&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;span&gt;密码：&lt;/span&gt;
+        &lt;input type="password"&gt;
+    &lt;/p&gt;
+    &lt;p&gt;进度条：&lt;progress min="0" max="100" value="50" /&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;label&gt;&lt;input type="radio" checked&gt;单选框&lt;/label&gt;
+        &lt;label&gt;&lt;input type="checkbox" checked&gt;复选框&lt;/label&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;button type="button"&gt;按钮&lt;/button&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+    </pre>
                     </div>
                 </li>
             </ul>
