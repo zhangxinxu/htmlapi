@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>meta name="theme-color"使用测试</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <meta name="theme-color" content="#0C58C0" />
+    <style>
+        .demo {
+            height: 300px;
+            display: grid;
+            place-items: center;
+            background-color: #0C58C0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>meta name="theme-color"使用测试演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<p>使用原生的手机浏览器访问本页面，看看浏览器标题栏的背景色有没有变化？<br><br><img src="data:image/png;base64,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"></p>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;meta name="theme-color" content="#0C58C0" /&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
