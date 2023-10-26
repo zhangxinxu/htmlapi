@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>meta name=color-scheme使用测试</title>
+    <link rel="import" href="../include/meta.html">
+    <meta name="color-scheme" content="dark light" />
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Checkbox.css">
+<link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Switch.css">
+    <style>
+        .demo {
+            background-color: Background;
+            color: MenuText;
+        }
+        body:has(.operate :checked) {
+            color-scheme: dark;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>meta name=color-scheme使用测试演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                <div class="operate">
+                    <label>深色主题：<input type="checkbox" is="ui-switch"></label>
+                </div>
+<h4>看看这些表单控件的颜色……</h4>
+<form>
+    <p>
+        <span>邮箱：</span>
+        <input type="email">
+    </p>
+    <p>
+        <span>密码：</span>
+        <input type="password">
+    </p>
+    <p>进度条：<progress min="0" max="100" value="50" /></p>
+    <p>
+        <label><input type="radio" checked>单选框</label>
+        <label><input type="checkbox" checked>复选框</label>
+    </p>
+    <p>
+        <button type="button">按钮</button>
+    </p>
+</form>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;meta name="color-scheme" content="dark light" /&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
