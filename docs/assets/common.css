@@ -26,7 +26,7 @@ html{overflow-x:hidden;overflow-y:auto;}
 body{width:100vw;background:#a0b3d6;color:#333;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-text-size-adjust:none;-webkit-touch-callout:none;}
 a{color:#34538b;}
 .header{height:66px;}
-.logo{position:absolute;width:239px;height:66px;background:url(/assets/logo.png) no-repeat 16px 50%; background-size:auto 75%;}
+.logo{position:absolute;width:239px;height:66px;background:url(https://www.zhangxinxu.com/php/image/zxx_home_logo.png) no-repeat 30px 50%; background-size:158px;}
 .index{line-height:20px;}
 .main{background:#beceeb;font-size:14px;}
 .main > h1{line-height:48px; padding:0 20px; text-align:center; font-size:18px; background-color: #c1d5eb; font-family:'simhei', 'kaiti'; font-weight:bold; text-shadow:0px 1px #f2f2f2; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
@@ -84,15 +84,18 @@ tr:hover{opacity:0.95; filter:Alpha(opacity=95);}
 }
 @media (max-width: 800px) {
    .col2 > li{float:none;width:auto;}
-   .logo{background-position:8px 50%;}
+   .logo{background-position:20px 50%;}
    .show > h3,.code_x{padding-left: 20px;}
 }
 @media (max-width: 640px) {
 	.header, .logo {
 		height: 48px;
 	}
+	.logo {
+		background-size: 128px 25px;
+	}
 	.main > h1 {
-		font-size: 16px;
+		font-size:  16px;
 		line-height: 40px;
 	}
 	.remind {

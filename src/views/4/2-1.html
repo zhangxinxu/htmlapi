@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PNG格式favicon多个尺寸设置测试</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="icon" type="image/png" href="/assets/favicon-16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="icon" type="image/png" href="/assets/favicon-128.png" sizes="128x128">
+    <style>
+        .demo {
+            height: 200px;
+            display: grid;
+            place-items: center;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>PNG格式favicon多个尺寸设置测试演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                看看加载的网站图标的尺寸是多少？
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;link rel="icon" type="image/png" href="/assets/favicon-16.png" sizes="16x16"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-64.png" sizes="64x64"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-128.png" sizes="128x128"&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>

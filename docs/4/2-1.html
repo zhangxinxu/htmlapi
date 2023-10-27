@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PNG格式favicon多个尺寸设置测试</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <link rel="icon" type="image/png" href="/assets/favicon-16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="icon" type="image/png" href="/assets/favicon-128.png" sizes="128x128">
+    <style>
+        .demo {
+            height: 200px;
+            display: grid;
+            place-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>PNG格式favicon多个尺寸设置测试演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                看看加载的网站图标的尺寸是多少？
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;link rel="icon" type="image/png" href="/assets/favicon-16.png" sizes="16x16"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-64.png" sizes="64x64"&gt;
+&lt;link rel="icon" type="image/png" href="/assets/favicon-128.png" sizes="128x128"&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
