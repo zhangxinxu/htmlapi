@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>rel=alternate实现换肤效果</title>
+    <link rel="import" href="../include/meta.html">
+    <link href="https://www.zhangxinxu.com/study/201902/default.css" rel="stylesheet" type="text/css" title="默认">
+<link href="https://www.zhangxinxu.com/study/201902/red.css" rel="alternate stylesheet" type="text/css" title="红色">
+<link href="https://www.zhangxinxu.com/study/201902/green.css" rel="alternate stylesheet" type="text/css" title="绿色">
+    <style>
+        .demo {
+            height: 300px;
+            display: grid;
+            place-items: center;
+        }
+.box {
+	display: inline-block;
+	padding: 10px;
+}
+.box img {
+    width: 256px;
+}
+label {
+	display: inline-block;
+	width: 14px; height: 14px;
+	background-color: #333;
+	font-size: 0;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+[type="radio"] {
+	position: absolute;
+	clip: rect(0 0 0 0);	
+}
+[for="red"] {
+	background-color: #cd0000;
+}
+[for="green"] {
+	background-color: green;
+}
+:checked + label {
+	outline: 2px solid #3FF;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>PNG格式favicon多个尺寸设置测试演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<div class="box">
+    <img src="/assets/example.jpg">
+    <p>背景色是？文字颜色是？</p>
+</div>
+<p>
+    选择样式：
+    <input id="default" type="radio" name="skin" value="default.css" checked><label for="default">默认</label>
+    <input id="red" type="radio" name="skin" value="red.css"><label for="red">红色</label>
+    <input id="green" type="radio" name="skin" value="green.css"><label for="green">绿色</label>
+</p>
+            </div>
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;div class="box"&gt;
+    &lt;img src="/assets/example.jpg"&gt;
+    &lt;p&gt;背景色是？文字颜色是？&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;
+    选择样式：
+    &lt;input id="default" type="radio" name="skin" value="default.css" checked&gt;&lt;label for="default"&gt;默认&lt;/label&gt;
+    &lt;input id="red" type="radio" name="skin" value="red.css"&gt;&lt;label for="red"&gt;红色&lt;/label&gt;
+    &lt;input id="green" type="radio" name="skin" value="green.css"&gt;&lt;label for="green"&gt;绿色&lt;/label&gt;
+&lt;/p&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+                        <pre>/* default.css中 */
+.box {
+    outline: 5px solid;
+    outline-offset: -5px;
+}
+/* red.css中 */
+.box {
+    background-color: #cd0000;
+    color: #fff;
+}
+/* gren.css中 */
+.box {
+    background-color: green;
+    color: orange;
+}</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+                        <pre>var eleLinks = document.querySelectorAll('link[title]');
+var eleRadios = document.querySelectorAll('[type="radio"]');
+[].slice.call(eleRadios).forEach(function (radio) {
+    radio.addEventListener('click', function () {
+        var value = this.value;
+        [].slice.call(eleLinks).forEach(function (link) {
+            link.disabled = true;
+            if (link.getAttribute('href').includes(value)) {
+                link.disabled = false;
+            }
+        });
+    });
+});</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <script>
+        var eleLinks = document.querySelectorAll('link[title]');
+        var eleRadios = document.querySelectorAll('input[type="radio"]');
+        [].slice.call(eleRadios).forEach(function (radio) {
+            radio.addEventListener('click', function () {
+                var value = this.value;
+                [].slice.call(eleLinks).forEach(function (link) {
+                    link.disabled = true;
+                    if (link.getAttribute('href').includes(value)) {
+                        link.disabled = false;
+                    }
+                });
+            });
+        });
+        </script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
