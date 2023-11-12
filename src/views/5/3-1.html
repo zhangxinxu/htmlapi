@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>del和ins元素设置背景色模拟diff效果示意</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+    </style>
+<style>
+del, ins {
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+del {
+  background-color: #fbb;
+}
+
+ins {
+  background-color: #d4fcbc;
+}
+
+del::before,
+ins::before {
+  position: absolute;
+  left: 0.5rem;
+  font-family: monospace;
+}
+
+del::before {
+  content: '−';
+}
+
+ins::before {
+  content: '+';
+}
+
+p {
+  margin: 0 1.8rem 0;
+  font-family: Consolas, Monaco, monospace;;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使label元素与表单控件元素演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<p>const arr = [];</p>
+<del>
+  <p>if (strA == strB) {</p>
+</del>
+<ins datetime="2024-04-01">
+  <p>if (strA === strB) {</p>
+</ins>
+<p>  arr.push(arrA);</p>
+<p>}</p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;p&gt;const arr = [];&lt;/p&gt;
+&lt;del&gt;
+  &lt;p&gt;if (strA == strB) {&lt;/p&gt;
+&lt;/del&gt;
+&lt;ins datetime="2024-04-01"&gt;
+  &lt;p&gt;if (strA === strB) {&lt;/p&gt;
+&lt;/ins&gt;
+&lt;p&gt;  arr.push(arrA);&lt;/p&gt;
+&lt;p&gt;}&lt;/p&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">del, ins {
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+del {
+  background-color: #fbb;
+}
+
+ins {
+  background-color: #d4fcbc;
+}
+
+del::before,
+ins::before {
+  position: absolute;
+  left: 0.5rem;
+  font-family: monospace;
+}
+
+del::before {
+  content: '−';
+}
+
+ins::before {
+  content: '+';
+}
+
+p {
+  margin: 0 1.8rem 0;
+  font-family: Consolas, Monaco, monospace;;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
