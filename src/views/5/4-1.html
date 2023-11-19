@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>hr元素模拟分隔线效果</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            max-width: 480px;
+            margin-inline: auto;
+            text-align: start;
+        }
+.hr-wavy {
+    border: 0;
+    color: #d0d0d5;
+    height: .5em;
+    white-space: nowrap;
+    letter-spacing: 100vw;
+    padding-top: .5em;
+}
+.hr-wavy::before {
+    content: "\2000\2000";
+    /* IE浏览器实线代替 */
+    text-decoration: overline;
+    /* 现代浏览器 */
+    text-decoration: overline wavy;
+}
+
+.hr-solid-content {
+    color: #a2a9b6;
+    border: 0;
+    font-size: 12px;
+    padding: 1em 0;
+    position: relative;
+}
+.hr-solid-content::before {
+    content: attr(data-content);
+    position: absolute;
+    padding: 0 1ch;
+    line-height: 1px;
+    border: solid #d0d0d5;
+    border-width: 0 99vw;
+    width: fit-content;
+    /* for 不支持fit-content浏览器 */
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+}
+    </style>
+<style>
+
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使label元素与表单控件元素演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>波浪线</h4>
+<hr class="hr-wavy">
+
+<h4>带文字内容的分隔线</h4>
+<hr class="hr-solid-content" data-content="分隔线">
+<hr class="hr-solid-content" data-content="文字自适应，背景透明">
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;波浪线&lt;/h4&gt;
+&lt;hr class="hr-wavy"&gt;
+
+&lt;h4&gt;带文字内容的分隔线&lt;/h4&gt;
+&lt;hr class="hr-solid-content" data-content="分隔线"&gt;
+&lt;hr class="hr-solid-content" data-content="文字自适应，背景透明"&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">.hr-wavy {
+    border: 0;
+    color: #d0d0d5;
+    height: .5em;
+    white-space: nowrap;
+    letter-spacing: 100vw;
+    padding-top: .5em;
+}
+.hr-wavy::before {
+    content: "\2000\2000";
+    /* IE浏览器实线代替 */
+    text-decoration: overline;
+    /* 现代浏览器 */
+    text-decoration: overline wavy;
+}
+
+.hr-solid-content {
+    color: #a2a9b6;
+    border: 0;
+    font-size: 12px;
+    padding: 1em 0;
+    position: relative;
+}
+.hr-solid-content::before {
+    content: attr(data-content);
+    position: absolute;
+    padding: 0 1ch;
+    line-height: 1px;
+    border: solid #d0d0d5;
+    border-width: 0 99vw;
+    width: fit-content;
+    /* for 不支持fit-content浏览器 */
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
