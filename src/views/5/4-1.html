@@ -13,16 +13,13 @@
     border: 0;
     color: #d0d0d5;
     height: .5em;
-    white-space: nowrap;
-    letter-spacing: 100vw;
     padding-top: .5em;
+    text-align-last: justify;
 }
 .hr-wavy::before {
-    content: "\2000\2000";
-    /* IE浏览器实线代替 */
-    text-decoration: overline;
-    /* 现代浏览器 */
-    text-decoration: overline wavy;
+    content: "\3000\3000";
+    text-decoration-style: wavy;
+    text-decoration-line: overline;
 }
 
 .hr-solid-content {
