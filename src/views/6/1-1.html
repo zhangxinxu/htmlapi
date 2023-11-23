@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>命名空间与SVG样式控制</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            width: 200px;
+            margin-inline: auto;
+            text-align: start;
+        }
+    </style>
+<style>
+@namespace "http://www.w3.org/1999/xhtml";
+@namespace svg "http://www.w3.org/2000/svg";
+a { color: blue; }
+svg|a { color: red; fill: currentColor; }
+</style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>使label元素与表单控件元素演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<p>我是<a href="">普通a元素</a>，颜色是什么？</p>
+<svg height="40">
+    <a xlink:href="">
+      <text x="0" y="20">我是svg中的a元素</text>
+    </a>
+</svg>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;p&gt;我是&lt;a href=""普通&gt;a元素&lt;/a&gt;，颜色是什么？&lt;/p&gt;
+&lt;svg height="40"&gt;
+    &lt;a xlink:href=""&gt;
+      &lt;text x="0" y="20"&gt;我是svg中的a元素&lt;/text&gt;
+    &lt;/a&gt;
+&lt;/svg&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">@namespace "http://www.w3.org/1999/xhtml";
+@namespace svg "http://www.w3.org/2000/svg";
+a { color: blue; }
+svg|a { color: red; fill: currentColor; }</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
