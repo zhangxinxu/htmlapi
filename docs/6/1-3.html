@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>外链SVG文件的若干方法示意</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+        .demo :is(img, object, iframe, embed) {
+            width: 100px; height: 100px;
+            vertical-align: top;
+        }
+        iframe {
+            border: 0;
+        }
+    </style>
+<style>
+img {
+    position: relative;
+    display: inline-block;
+}
+img::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: #0009;
+  color: transparent;
+}
+img::after {
+  content: attr(alt);
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  line-height: 2;
+  background-color: rgba(0,0,0,.5);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>命名空间与SVG样式控制</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>img元素加载</h4>
+<p>
+    <img src="/assets/circle.svg" alt="有命名空间">
+    <img src="/assets/circle-no-xmlns.svg" alt="没有命名空间">
+</p>
+<h4>object元素加载</h4>
+<p>
+    <object data="/assets/circle.svg" type="image/svg+xml">有命名空间</object>
+    <object data="/assets/circle-no-xmlns.svg" type="image/svg+xml">没有命名空间</object>
+</p>
+<h4>embed元素加载</h4>
+<p>
+    <embed src="/assets/circle.svg" type="image/svg+xml" />
+    <embed src="/assets/circle-no-xmlns.svg" type="image/svg+xml" />
+</p>
+<h4>iframe元素加载</h4>
+<div>
+    <iframe src="/assets/circle.svg">有命名空间</iframe>
+    <iframe src="/assets/circle-no-xmlns.svg">没有命名空间</iframe>
+</div>
+
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;img元素加载&lt;/h4&gt;
+&lt;p&gt;
+    &lt;img src="/assets/circle.svg" alt="有命名空间"&gt;
+    &lt;img src="/assets/circle-no-xmlns.svg" alt="没有命名空间"&gt;
+&lt;/p&gt;
+&lt;h4&gt;object元素加载&lt;/h4&gt;
+&lt;p&gt;
+    &lt;object data="/assets/circle.svg" type="image/svg+xml"&gt;有命名空间&lt;/object&gt;
+    &lt;object data="/assets/circle-no-xmlns.svg" type="image/svg+xml"&gt;没有命名空间&lt;/object&gt;
+&lt;/p&gt;
+&lt;h4&gt;embed元素加载&lt;/h4&gt;
+&lt;p&gt;
+    &lt;embed src="/assets/circle.svg" type="image/svg+xml" /&gt;
+    &lt;embed src="/assets/circle-no-xmlns.svg" type="image/svg+xml" /&gt;
+&lt;/p&gt;
+&lt;h4&gt;iframe元素加载&lt;/h4&gt;
+&lt;div&gt;
+    &lt;iframe src="/assets/circle.svg"&gt;有命名空间&lt;/iframe&gt;
+    &lt;iframe src="/assets/circle-no-xmlns.svg"&gt;没有命名空间&lt;/iframe&gt;
+&lt;/div&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>circle.svg：</h5>
+    <pre name="code" class="html">&lt;svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100"&gt;
+  &lt;circle cx="50" cy="50" r="40"&gt;&lt;/circle&gt;
+&lt;/svg&gt;</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
