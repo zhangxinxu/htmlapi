@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>figure和figcaption元素使用示意</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+        img {
+            max-width: 100%;
+        }
+        
+        figure {
+            display: grid;
+            text-align: center;
+        }
+        figure > :where(img, figcaption) {
+            grid-area: 1 / 1;
+        }
+        figcaption {
+            color: #fff;
+            background-color: rgba(0, 0, 0, .6);
+            padding: 5px 10px;
+            align-self: end;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>figure和figcaption元素使用演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<figure>
+    <img src="/assets/example.jpg" alt="示意图">
+    <figcaption>示意图</figcaption>
+</figure>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;figure&gt;
+    &lt;img src="/assets/example.jpg" alt="示意图"&gt;
+    &lt;figcaption&gt;示意图&lt;/figcaption&gt;
+&lt;/figure&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">figure {
+    display: grid;
+    text-align: center;
+}
+figure &gt; :where(img, figcaption) {
+    grid-area: 1 / 1;
+}
+figcaption {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 5px 10px;
+    align-self: end;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
