@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>srcset属性和x描述符</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+        .demo img {
+            width: 128px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>srcset属性和x描述符使用演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                <h4>看看显示的是哪个尺寸的图片？</h4>
+                <img src="https://demo.cssworld.cn/new/images/w128.jpg" srcset="https://demo.cssworld.cn/new/images/w256.jpg 2x, https://demo.cssworld.cn/new/images/w512.jpg 3x ">
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;figure&gt;
+    &lt;img src="/assets/example.jpg" alt="示意图"&gt;
+    &lt;figcaption&gt;示意图&lt;/figcaption&gt;
+&lt;/figure&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">figure {
+    display: grid;
+    text-align: center;
+}
+figure &gt; :where(img, figcaption) {
+    grid-area: 1 / 1;
+}
+figcaption {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 5px 10px;
+    align-self: end;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
