@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>sizes属性和w描述符</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>sizes属性和w描述符描述符使用演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                
+                <img src="/assets/rect@1x.png" srcset="/assets/rect@1x.png 600w, /assets/rect@2x.png 1200w" sizes="(max-width: 480px) calc(100vw - 20px), 600px">
+
+                <p class="remind">对比iPad、普通PC屏，高清屏，手机下加载的图片吧</p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;img 
+  src="/assets/rect@1x.png" 
+  srcset="/assets/rect@1x.png 600w, 
+    /assets/rect@2x.png 1200w" 
+  sizes="(max-width: 480px) calc(100vw - 20px), 
+    600px"
+&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">/* 无 */</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
