@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>picture元素与不同比例图片显示</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>picture元素与不同比例图片显示演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                
+<picture>
+    <source srcset="/assets/rect.png" media="(min-width: 640px)">
+    <img src="/assets/square.png">
+</picture>
+
+<p class="remind">改变浏览器宽度，看看窄屏是否是方图，宽屏是长图？</p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;picture&gt;
+    &lt;source srcset="/assets/rect.png" media="(min-width: 640px)"&gt;
+    &lt;img src="/assets/square.png"&gt;
+&lt;/picture&gt;;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">/* 无 */</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
