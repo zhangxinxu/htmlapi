@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>webM视频合成案例</title>
+    <title>video元素实现运营动效</title>
     <link rel="import" href="../include/meta.html">
+    <meta name="referrer" content="no-referrer" />
     <style>
-.demo {
-    width: 300px;
-    margin-inline: auto;
-    text-align: start;
+figure {
+    display: inline-grid;
 }
-canvas,
 video {
-	width: 300px;
-	height: 200px;
+    mix-blend-mode: screen;
+}
+figure :is(video, img) {
+    grid-area: 1 / 1;
 }
     </style>
 </head>
 <body>
     <link rel="import" href="../include/header.html">
     <div class="main">
-        <h1>webM视频合成演示页面</h1>
+        <h1>video元素实现运营动效演示页面</h1>
         <div class="show">
             <h3>展示</h3>
             <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
             <div class="demo">
                 
-<h4>canvas效果</h4>
-<p class="remind">视频生成非必须可见，为了方便大家学习，故屏内显示。</p>
-<canvas id="canvas" width="600" height="400"></canvas>
+<figure>
+    <img src="https://image.zhangxinxu.com/image/blog/202312/night.jpg" width="150" height="267">
+    <video width="150" height="267" autoplay loop muted webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-orientation="portraint" x5-video-player-fullscreen="true" src="https://image.zhangxinxu.com/video/blog/201905/fire.mp4"></video>
+</figure>
 
-<p class="flex">
-	<button id="generate">生成webM视频</button>
-    <a id="download" download="htmlapi-book.webm">下载</a>
-</p>
-
-<div class="view">
-	<video id="video" width="600" height="400" controls autoplay></video>
-    <p class="time">webm视频生成时间：<output id="output">0</output>s</p>
-</div>
+<p class="remind">不动点击播放</p>
             </div>
 
             <h3>代码</h3>
@@ -45,110 +38,32 @@ video {
                 <li class="code_li">
                     <div class="code_x">
                         <h5>HTML：</h5>
-    <pre name="code" class="html">&lt;h4&gt;canvas效果&lt;/h4&gt;
-&lt;p class="remind"&gt;视频生成非必须可见，为了方便大家学习，故屏内显示。&lt;/p&gt;
-&lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;
-
-&lt;p class="flex"&gt;
-    &lt;button id="generate"&gt;生成webM视频&lt;/button&gt;
-    &lt;a id="download" download="htmlapi-book.webm"&gt;下载&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;div class="view"&gt;
-    &lt;video id="video" width="600" height="400" controls autoplay&gt;&lt;/video&gt;
-    &lt;p class="time"&gt;webm视频生成时间：&lt;output id="output"&gt;&lt;/output&gt;s&lt;/p&gt;
-&lt;/div&gt;</pre></div>
+    <pre name="code" class="html">&lt;figure&gt;
+    &lt;img src="night.jpg" width="150" height="267"&gt;
+    &lt;video width="150" height="267" autoplay loop muted playsinline="true" src="fire.mp4"&gt;&lt;/video&gt;
+&lt;/figure&gt;</pre></div>
                 </li>
                 <li class="code_li">
                     <div class="code_x">
                         <h5>CSS：</h5>
-    <pre name="code" class="css">canvas,
+    <pre name="code" class="css">figure {
+    display: inline-grid;
+}
 video {
-	width: 300px;
-	height: 200px;
+    mix-blend-mode: screen;
+}
+figure :is(video, img) {
+    grid-area: 1 / 1;
 }</pre></div>
-                </li>
-                <li class="code_li">
-                    <div class="code_x">
-                        <h5>JS：</h5>
-    <pre name="code" class="js">// 页面内动画示意
-// handleDraw 函数代码受制于篇幅原因，不展示
-// 有兴趣可以直接右键-页面源代码进行查看
-handleDraw(document.getElementById('canvas'));
-
-// 点击按钮的webM生成
-generate.onclick = function () {
-    // 构造webm生成器
-    var videoWriter = new WebMWriter({
-        // 每秒30帧
-        frameRate: 30
-    });
-    // 创建屏幕外 canvas
-    var canvas = document.createElement('canvas');    
-    canvas.width = 600;
-    canvas.height = 400;
-    // 时间记录
-    var timer = Date.now();
-    // handleDraw源码可右键页面查看
-    handleDraw(canvas, function () {
-        videoWriter.addFrame(canvas);    
-    }, function () {
-        videoWriter.complete().then(function(webMBlob) {
-            var blobUrl = URL.createObjectURL(webMBlob);
-            video.src = blobUrl;
-            download.href = blobUrl;
-            
-            // 时间设置
-            output.innerHTML = Math.round((Date.now() - timer) / 10) / 100;
-        });    
-    });
-    
-    // 一次性点击
-    this.disabled = true;
-};</pre>
-                    </div>
                 </li>
             </ul>
         </div>       
     </div>
-    <script src="https://www.zhangxinxu.com/study/202305/webm-writer-0.3.0.js"></script>
-<script src="https://www.zhangxinxu.com/study/202305/draw2.js"></script>
-    <script>
-window.bookUrl = '/assets/myself.jpg';
-// 页面内动画示意
-handleDraw(document.getElementById('canvas'));
-
-// 点击按钮的webM生成
-generate.onclick = function () {
-	// 构造webm生成器
-	var videoWriter = new WebMWriter({
-		// 每秒30帧
-		frameRate: 30
-	});
-	// 创建屏幕外 canvas
-	var canvas = document.createElement('canvas');	
-	canvas.width = 600;
-	canvas.height = 400;
-	// 时间记录
-	var timer = Date.now();
-	// handleDraw源码可右键页面查看
-	handleDraw(canvas, function () {
-		videoWriter.addFrame(canvas);	
-	}, function () {
-		videoWriter.complete().then(function(webMBlob) {
-			var blobUrl = URL.createObjectURL(webMBlob);
-			video.src = blobUrl;
-			download.href = blobUrl;
-			
-			// 时间设置
-			output.innerHTML = Math.round((Date.now() - timer) / 10) / 100;
-		});	
-	});
-	
-	// 一次性点击
-	this.disabled = true;
-};  
-    </script>
+<script>
+    document.querySelector('video').addEventListener('click', function () {
+        this.play();
+    });
+</script>
     <link rel="import" href="../include/footer.html">
 </body>
 </html>

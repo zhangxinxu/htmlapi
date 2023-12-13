@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>track元素与video外挂字幕</title>
+    <link rel="import" href="../include/meta.html">
+    <meta name="referrer" content="no-referrer" />
+    <style>
+.demo {
+    width: 300px;
+    margin-inline: auto;
+    text-align: start;
+}
+
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>track元素与video外挂字幕演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                
+<video id="video" width="180" height="314" controls>
+    <source src="https://image.zhangxinxu.com/video/blog/201806/sing-song.mp4" type="video/mp4">
+    <track src="/assets/sing-song.vtt" kind="subtitles" label="中文字幕" srclang="zh" default>
+    <track src="/assets/sing-song_fix.vtt" kind="subtitles" label="中文字幕（修正）" srclang="zh"> 
+</video>
+<p><button onClick="video.play();">重播</button></p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;video id="video" width="180" height="314" controls&gt;
+    &lt;source src="./sing-song.mp4" type="video/mp4"&gt;
+    &lt;track src="/assets/sing-song.vtt" kind="subtitles" label="中文字幕" srclang="zh" default&gt;
+    &lt;track src="/assets/sing-song_fix.vtt" kind="subtitles" label="中文字幕（修正）" srclang="zh"&gt; 
+&lt;/video&gt;
+&lt;p&gt;&lt;button onClick="video.play();"&gt;重播&lt;/button&gt;&lt;/p&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>Vtt：</h5>
+    <pre name="code" class="html">sing-song.vtt代码：
+WEBVTT
+
+00:00:00.001 --&gt; 00:00:01.000
+请把你的锅
+
+00:00:01.001 --&gt; 00:00:03.500
+带回你的虾
+
+00:00:03.501 --&gt; 00:00:07.000
+请把你的微笑留下……
+
+00:00:07.501 --&gt; 00:00:10.000
+请把你的锅
+
+00:00:10.001 --&gt; 00:00:12.000
+带回你的虾
+
+00:00:12.001 --&gt; 00:00:15.000
+请把你的微笑留下</pre></div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>

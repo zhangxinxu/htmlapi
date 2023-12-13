@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>带声音的MP4视频合成案例</title>
+    <title>webM视频合成案例</title>
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="format-detection" content="telephone=no">
@@ -20,9 +20,6 @@ video {
 	width: 300px;
 	height: 200px;
 }
-.view:has(output:empty) {
-    display: none;
-}
     </style>
 </head>
 <body>
@@ -30,28 +27,24 @@ video {
 	<a href="/" class="logo" title="回到demo首页"></a>	
 </div>
     <div class="main">
-        <h1>带声音的MP4视频合成演示页面</h1>
+        <h1>webM视频合成演示页面</h1>
         <div class="show">
             <h3>展示</h3>
             <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
             <div class="demo">
                 
 <h4>canvas效果</h4>
-<p class="remind">canvas和audio非必须可见，为了方便大家学习才展示出来的。</p>
+<p class="remind">视频生成非必须可见，为了方便大家学习，故屏内显示。</p>
 <canvas id="canvas" width="600" height="400"></canvas>
-<h4>音频素材</h4>
-<p>
-	<audio id="audio" src="/assets/happy-and-bright.mp3" controls preload="auto">
-</p>
 
 <p class="flex">
-	<button id="generate">生成MP4视频</button>
-    <a id="download" download="htmlapi-book.mp4">下载</a>
+	<button id="generate">生成webM视频</button>
+    <a id="download" download="htmlapi-book.webm">下载</a>
 </p>
 
 <div class="view">
-	<video id="video" width="600" height="400" controls></video>
-    <p class="time">mp4视频绘制时间：<output id="output1"></output>s，生成时间和播放一致（等音频流完整播放）：<output id="output2"></output>s</p>
+	<video id="video" width="600" height="400" controls autoplay></video>
+    <p class="time">webm视频生成时间：<output id="output">0</output>s</p>
 </div>
             </div>
 
@@ -61,21 +54,17 @@ video {
                     <div class="code_x">
                         <h5>HTML：</h5>
     <pre name="code" class="html">&lt;h4&gt;canvas效果&lt;/h4&gt;
-&lt;p class="remind"&gt;canvas和audio非必须可见，为了方便大家学习才展示出来的。&lt;/p&gt;
+&lt;p class="remind"&gt;视频生成非必须可见，为了方便大家学习，故屏内显示。&lt;/p&gt;
 &lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;
-&lt;h4&gt;音频素材&lt;/h4&gt;
-&lt;p&gt;
-    &lt;audio id="audio" src="/assets/happy-and-bright.mp3" controls preload="auto"&gt;
-&lt;/p&gt;
 
 &lt;p class="flex"&gt;
-    &lt;button id="generate"&gt;生成MP4视频&lt;/button&gt;
-    &lt;a id="download" download="htmlapi-book.mp4"&gt;下载&lt;/a&gt;
+    &lt;button id="generate"&gt;生成webM视频&lt;/button&gt;
+    &lt;a id="download" download="htmlapi-book.webm"&gt;下载&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;div class="view"&gt;
-    &lt;video id="video" width="600" height="400" controls&gt;&lt;/video&gt;
-    &lt;p class="time"&gt;mp4视频绘制时间：&lt;output id="output1"&gt;&lt;/output&gt;s，生成时间和播放一致（等音频流完整播放）：&lt;output id="output2"&gt;&lt;/output&gt;s&lt;/p&gt;
+    &lt;video id="video" width="600" height="400" controls autoplay&gt;&lt;/video&gt;
+    &lt;p class="time"&gt;webm视频生成时间：&lt;output id="output"&gt;&lt;/output&gt;s&lt;/p&gt;
 &lt;/div&gt;</pre></div>
                 </li>
                 <li class="code_li">
@@ -90,184 +79,83 @@ video {
                 <li class="code_li">
                     <div class="code_x">
                         <h5>JS：</h5>
-    <pre name="code" class="js">// 较长，参见页面源代码</pre>
+    <pre name="code" class="js">// 页面内动画示意
+// handleDraw 函数代码受制于篇幅原因，不展示
+// 有兴趣可以直接右键-页面源代码进行查看
+handleDraw(document.getElementById('canvas'));
+
+// 点击按钮的webM生成
+generate.onclick = function () {
+    // 构造webm生成器
+    var videoWriter = new WebMWriter({
+        // 每秒30帧
+        frameRate: 30
+    });
+    // 创建屏幕外 canvas
+    var canvas = document.createElement('canvas');    
+    canvas.width = 600;
+    canvas.height = 400;
+    // 时间记录
+    var timer = Date.now();
+    // handleDraw源码可右键页面查看
+    handleDraw(canvas, function () {
+        videoWriter.addFrame(canvas);    
+    }, function () {
+        videoWriter.complete().then(function(webMBlob) {
+            var blobUrl = URL.createObjectURL(webMBlob);
+            video.src = blobUrl;
+            download.href = blobUrl;
+            
+            // 时间设置
+            output.innerHTML = Math.round((Date.now() - timer) / 10) / 100;
+        });    
+    });
+    
+    // 一次性点击
+    this.disabled = true;
+};</pre>
                     </div>
                 </li>
             </ul>
         </div>       
     </div>
-    <script src="https://www.zhangxinxu.com/study/202305/mp4-muxer.js"></script>
+    <script src="https://www.zhangxinxu.com/study/202305/webm-writer-0.3.0.js"></script>
 <script src="https://www.zhangxinxu.com/study/202305/draw2.js"></script>
     <script>
 window.bookUrl = '/assets/myself.jpg';
+// 页面内动画示意
 handleDraw(document.getElementById('canvas'));
-// 构造器，和音视频编码对象
-var muxer = null;
-var videoEncoder = null;
-var audioEncoder = null;
 
-// 结束编码
-const endEncoding = async () => {
-    await videoEncoder?.flush();
-    await audioEncoder?.flush();
-    muxer.finalize();
-
-    let { buffer } = muxer.target;
-
-    var blobUrl = URL.createObjectURL(new Blob([buffer]));
-    video.src = blobUrl;
-    download.href = blobUrl;
-
-    videoEncoder = null;
-    audioEncoder = null;
-    muxer = null;
-};
-
-// 创建屏幕外 canvas
-var canvas = document.createElement('canvas');
-canvas.width = 600;
-canvas.height = 400;
-
-// 构造包装器
-muxer = new Mp4Muxer.Muxer({
-    target: new Mp4Muxer.ArrayBufferTarget(),
-    video: {
-        codec: 'avc',
-        width: canvas.width,
-        height: canvas.height,
-        frameRate: 30
-    },
-    audio: {
-        codec: 'aac',
-        sampleRate: 48000,
-        numberOfChannels: 1
-    },
-    firstTimestampBehavior: 'offset'
-});
-
-// 音视频编码器，这里使用的是WebCodese API
-videoEncoder = new VideoEncoder({
-    output: (chunk, meta) => muxer.addVideoChunk(chunk, meta),
-    error: e => console.error(e)
-});
-videoEncoder.configure({
-    codec: 'avc1.42001f',
-    width: canvas.width,
-    height: canvas.height,
-    bitrate: 1e6
-});
-// 音频的
-audioEncoder = new AudioEncoder({
-    output: (chunk, meta) => muxer.addAudioChunk(chunk, meta),
-    error: e => console.error(e)
-});
-
-// 音频数据
-var audioData = null;
-
-// 获取音频完整的 audioBuffer 数据
-fetch(audio.src).then(response => response.arrayBuffer()).then(buffer => {
-    audioBuffer = buffer;
-});
-
-
-// 点击按钮的mp4生成
-generate.onclick = async function () {
-    // 编码视频数据
-    var startTime = document.timeline.currentTime;
-    var frameCounter = 0;
-    // handleDraw源码可右键页面查看
-    handleDraw(canvas, function () {
-        let frame = new VideoFrame(canvas, {
-            timestamp: (frameCounter * 1000 / 30) * 1000
-        });
-
-        // 把最后的帧作为视频的预览画面
-        if (frameCounter == 30) {
-            canvas.toBlob(function (blob) {
-                video.poster = URL.createObjectURL(blob);
-            }, 'image/jpeg', 0.95);
-        }
-
-        frameCounter++;
-        videoEncoder.encode(frame, { keyFrame: frameCounter % 30 === 0 });
-        frame.close();
-    }, function () {
-        // 音频的处理
-        // 因为不知道音频需要截取多长的时间
-        // 因此，等画面帧结束之后才执行这里的代码
-        // 实际开发，如果知道视频的时长
-        // 可以提前进行音频编码
-
-        // 音频数据剪裁 https://www.zhangxinxu.com/wordpress/2020/07/js-audio-clip-copy-upload/
-        const audioContext = new AudioContext();
-        audioContext.decodeAudioData(audioBuffer).then(audioData => {
-            // 创建个全新的Float32Array去存放更扁平的音频数据
-            const numChannels = audioData.numberOfChannels;
-            // 如果是完整音频，则下面注释代码
-            // const audioFrameCount  = audioData.length;
-            // 这里的长度其实不到2秒，每秒30帧绘制，可由总帧数算是视频时长
-            const seconds = frameCounter / 30;
-            const audioFrameCount  = Math.round(seconds * audioData.sampleRate);
-
-            // 创建同样采用率、同样声道数量，长度匹配的的空的AudioBuffer
-            var newAudioBuffer = new AudioContext().createBuffer(numChannels, audioFrameCount, audioData.sampleRate);
-            // 创建临时的Array存放复制的buffer数据
-            var anotherArray = new Float32Array(audioFrameCount);
-            // 声道的数据的复制和写入
-            var offset = 0;
-            for (var channel = 0; channel < numChannels; channel++) {
-                audioData.copyFromChannel(anotherArray, channel, 0);
-                newAudioBuffer.copyToChannel(anotherArray, channel, offset);
-            }
-
-            // 扁平数据
-            const planarData = new Float32Array(numChannels * audioFrameCount);
-
-            for (let channel = 0; channel < numChannels; channel++) {
-                const channelData = newAudioBuffer.getChannelData(channel);
-                planarData.set(channelData, channel * audioFrameCount);
-            }
-
-            // 构造 AudioData 对象
-            const audioData2 = new AudioData({
-                format: 'f32-planar',
-                sampleRate: audioData.sampleRate,
-                numberOfFrames: audioFrameCount ,
-                numberOfChannels: audioData.numberOfChannels,
-                timestamp: 0,
-                data: planarData
-            });
-
-            audioEncoder.configure({
-                codec: 'mp4a.40.2',
-                numberOfChannels: audioData.numberOfChannels,
-                sampleRate: audioData.sampleRate,
-                bitrate: 128000
-            });
-
-            // 音频编码
-            audioEncoder.encode(audioData2);
-
-            // 预期结束时间
-            const timeUsed = document.timeline.currentTime - startTime;
-            const timerActualEnd = frameCounter * 1000 / 30;
-
-            endEncoding();
-
-            // 按钮提示还原
-            generate.innerHTML = '生成完成';
-
-            // 时间设置
-            output1.innerHTML = Math.round(timeUsed / 10) / 100;
-            output2.innerHTML = Math.round(timerActualEnd / 10) / 100;
-        });        
-    });
-
-    // 一次性点击
-    this.disabled = true;
-    this.textContent = '生成中...';
-};
+// 点击按钮的webM生成
+generate.onclick = function () {
+	// 构造webm生成器
+	var videoWriter = new WebMWriter({
+		// 每秒30帧
+		frameRate: 30
+	});
+	// 创建屏幕外 canvas
+	var canvas = document.createElement('canvas');	
+	canvas.width = 600;
+	canvas.height = 400;
+	// 时间记录
+	var timer = Date.now();
+	// handleDraw源码可右键页面查看
+	handleDraw(canvas, function () {
+		videoWriter.addFrame(canvas);	
+	}, function () {
+		videoWriter.complete().then(function(webMBlob) {
+			var blobUrl = URL.createObjectURL(webMBlob);
+			video.src = blobUrl;
+			download.href = blobUrl;
+			
+			// 时间设置
+			output.innerHTML = Math.round((Date.now() - timer) / 10) / 100;
+		});	
+	});
+	
+	// 一次性点击
+	this.disabled = true;
+};  
     </script>
     <div class="footer">
     <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
