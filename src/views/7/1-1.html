@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>requestSubmit()和submit()方法对比</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/LightTip.css">
+    <style>
+        .demo {
+            width: 200px;
+            margin-inline: auto;
+            text-align: start;
+        }
+        @media (min-width: 440px) {
+            .demo {
+                width: 440px;
+                display: grid;
+                grid: auto 1fr / 1fr 1fr;
+                grid-auto-flow: column;
+            }
+            .demo h4 {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>requestSubmit()和submit()方法对比演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+
+<h4>submit方法</h4>
+<form action="" method="get">
+    <p><input name="name" value="张三" /></p>
+    <p>
+        <textarea placeholder="Ctrl+Enter提交"></textarea>
+    </p>
+    <input type="submit" value="提交" />
+</form>
+
+<h4>requestSubmit方法</h4>
+<form action="" method="get">
+    <p><input name="name" value="李四" /></p>
+    <p>
+        <textarea placeholder="Ctrl+Enter提交"></textarea>
+    </p>
+    <input type="submit" value="搜索" />
+</form>
+
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;submit方法&lt;/h4&gt;
+&lt;form action="" method="get"&gt;
+    &lt;p&gt;&lt;input name="name" value="张三" /&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;textarea placeholder="Ctrl+Enter提交"&gt;&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;input type="submit" value="提交" /&gt;
+&lt;/form&gt;
+
+&lt;h4&gt;requestSubmit方法&lt;/h4&gt;
+&lt;form action="" method="get"&gt;
+    &lt;p&gt;&lt;input name="name" value="李四" /&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;textarea placeholder="Ctrl+Enter提交"&gt;&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;input type="submit" value="搜索" /&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">document.querySelectorAll('form').forEach((form, index) =&gt; {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Ajax请求
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        new LightTip('提交了姓名：' + name, 'success');
+    });
+    // Ctrl+Enter文本域触发提交
+    form.querySelector('textarea').addEventListener('keydown', function (event) {
+        if (event.ctrlKey &amp;&amp; event.key === 'Enter') {
+            // 提交表单
+            form[index ? 'requestSubmit' : 'submit']();
+        }
+    });
+}); </pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script type="module" src="https://unpkg.com/lu2/theme/edge/js/common/ui/LightTip.js"></script>
+<script type="module">
+document.querySelectorAll('form').forEach((form, index) => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Ajax请求
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        new LightTip('提交了姓名：' + name, 'success');
+    });
+    // Ctrl+Enter文本域触发提交
+    form.querySelector('textarea').addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            // 提交表单
+            form[index ? 'requestSubmit' : 'submit']();
+        }
+    });
+});    
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
