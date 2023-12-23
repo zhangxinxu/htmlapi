@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>formdata事件</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>formdata事件演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+
+<form id="form" action>
+    <input name="name" value="张三" />
+    <button type="submit">提交</button>
+</form>
+
+<p class="remind">zxx: 表单中没有token字段，但提交后的url出现了</p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;form id="form" action&gt;
+    &lt;input name="name" value="张三" /&gt;
+    &lt;button type="submit"&gt;提交&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">form.addEventListener('formdata', (event) =&gt; {
+    event.formData.append('token', 'abc');
+});</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+form.addEventListener('formdata', (event) => {
+    event.formData.append('token', 'abc');
+});  
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
