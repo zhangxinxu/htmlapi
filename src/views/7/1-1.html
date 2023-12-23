@@ -116,6 +116,7 @@ document.querySelectorAll('form').forEach((form, index) => {
             // 提交表单
             form[index ? 'requestSubmit' : 'submit']();
             // form.dispatchEvent(new Event('submit'));
+            // form.requestSubmit(form.querySelector('[type="submit"]'));
         }
     });
 });    
