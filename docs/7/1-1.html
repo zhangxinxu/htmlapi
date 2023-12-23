@@ -116,12 +116,14 @@ document.querySelectorAll('form').forEach((form, index) => {
         const formData = new FormData(this);
         const name = formData.get('name');
         new LightTip('提交了姓名：' + name, 'success');
+        console.log('submitter：', event.submitter);
     });
     // Ctrl+Enter文本域触发提交
     form.querySelector('textarea').addEventListener('keydown', function (event) {
         if (event.ctrlKey && event.key === 'Enter') {
             // 提交表单
             form[index ? 'requestSubmit' : 'submit']();
+            // form.dispatchEvent(new Event('submit'));
         }
     });
 });    
