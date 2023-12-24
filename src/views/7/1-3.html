@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>reset重置自动触发change事件</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+        .demo {
+            width: 300px;
+            margin-inline: auto;
+            text-align: start;
+        }
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>reset重置自动触发change事件演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+
+<form>
+  单价：¥68
+  <p>数量：<input id="input" type="number" value="1"> 件</p>
+  <p>总价：<output id="output">68</output>元</p>
+  <button type="reset">重置</button>
+</form>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;form&gt;
+  单价：¥68
+  &lt;p&gt;数量：&lt;input id="input" type="number" value="1"&gt; 件&lt;/p&gt;
+  &lt;p&gt;总价：&lt;output id="output"&gt;68&lt;/output&gt;元&lt;/p&gt;
+  &lt;button type="reset"&gt;重置&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">// 观察页面所有的form元素，绑定reset事件
+document.addEventListener('reset', function(event) {
+    // 事件对象e中的target属性，指向触发事件的元素
+    var target = event.target;
+    // 如果触发事件的元素是form元素
+    if (target.tagName.toLowerCase() === 'form') {
+        // 遍历form元素中的所有input元素
+        var inputs = [].slice.call(target.elements);
+        // 只有当前后值变化的时候才会触发 change 事件
+        inputs.forEach(function (input) {
+            input.tempValue = input.value;
+        });
+
+        setTimeout(function () {
+            inputs.forEach(function (input) {
+                if (input.tempValue !== input.value) {
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        }, 1);
+    }
+}, false);
+
+// 正常的业务代码
+input.onchange = function () {
+  output.textContent = 68 * this.value;
+};</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+<script>
+// 观察页面所有的form元素，绑定reset事件
+document.addEventListener('reset', function(event) {
+    // 事件对象e中的target属性，指向触发事件的元素
+    var target = event.target;
+    // 如果触发事件的元素是form元素
+    if (target.tagName.toLowerCase() === 'form') {
+        // 遍历form元素中的所有input元素
+        var inputs = [].slice.call(target.elements);
+        // 只有当前后值变化的时候才会触发 change 事件
+        inputs.forEach(function (input) {
+            input.tempValue = input.value;
+        });
+
+        setTimeout(function () {
+            inputs.forEach(function (input) {
+                if (input.tempValue !== input.value) {
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        }, 1);
+    }
+}, false);
+</script>
+<script>
+input.onchange = function () {
+  output.textContent = 68 * this.value;
+};  
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
