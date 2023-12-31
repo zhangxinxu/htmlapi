@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>select多选的value属性重置与样式自定义</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+
+select[multiple] {
+  scrollbar-width: thin;
+  border: 1px solid #a2a9b6;
+  background-color: #2a80eb;
+  min-width: 150px;
+  outline: none;
+  line-height: 1.25rem;
+  border-radius: 4px;
+  overflow: auto;
+}
+option {
+  padding: .375rem 2rem .375rem 1rem;
+  box-shadow: inset 0 1px #ededef;
+  color: #4c5161;
+  font-size: .875rem;
+  background-color: #fff;
+}
+option::after {
+  content: ' ✓';
+  color: transparent;
+}
+option:hover {
+    background-color: #f0f7ff;
+}
+option:checked {
+  background-color: #e0f0ff;
+  mix-blend-mode: lighten;
+}
+option:checked::after {
+    color: currentColor;
+}
+select {
+  font-family: system-ui;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>select多选的value属性重置与样式自定义演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+
+<select id="select" multiple>
+    <option value="1">选项1</option>
+    <option value="2">选项2</option>
+    <option value="3">选项3</option>
+    <option value="4">选项4</option>
+    <option value="5">选项5</option>
+</select>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;form&gt;
+  单价：¥68
+  &lt;p&gt;数量：&lt;input id="input" type="number" value="1"&gt; 件&lt;/p&gt;
+  &lt;p&gt;总价：&lt;output id="output"&gt;68&lt;/output&gt;元&lt;/p&gt;
+  &lt;button type="reset"&gt;重置&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">// 观察页面所有的form元素，绑定reset事件
+document.addEventListener('reset', function(event) {
+    // 事件对象e中的target属性，指向触发事件的元素
+    var target = event.target;
+    // 如果触发事件的元素是form元素
+    if (target.tagName.toLowerCase() === 'form') {
+        // 遍历form元素中的所有input元素
+        var inputs = [].slice.call(target.elements);
+        // 只有当前后值变化的时候才会触发 change 事件
+        inputs.forEach(function (input) {
+            input.tempValue = input.value;
+        });
+
+        setTimeout(function () {
+            inputs.forEach(function (input) {
+                if (input.tempValue !== input.value) {
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        }, 1);
+    }
+}, false);
+
+// 正常的业务代码
+input.onchange = function () {
+  output.textContent = 68 * this.value;
+};</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+
+<script>
+// 让多选框的value属性返回所有选中项的值
+Object.defineProperty(HTMLSelectElement.prototype, 'value', {
+  configurable: true,
+  enumerable: true,
+  writeable: true,
+  get: function () {
+      return [...select.selectedOptions].map(option => option.value).join();
+  },
+  set: function (value) {
+      [].slice.call(this.options).some((option) => {
+          if (value.split(',').includes(option.value)) {
+              option.selected = true;
+            // 单选第一个匹配即选中
+              if (!this.multiple) {
+                return true;
+              }
+          } else if (this.multiple) {
+              option.selected = false;
+          }
+      });
+  }
+});
+
+</script>
+<script>
+select.onchange = function () {
+  console.log('选中的值：' + this.value);
+} 
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
