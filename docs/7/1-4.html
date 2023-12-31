@@ -12,6 +12,7 @@
     <style>
 
 select[multiple] {
+  padding: 0;
   scrollbar-width: thin;
   border: 1px solid #a2a9b6;
   background-color: #2a80eb;
@@ -81,34 +82,70 @@ select {
                 </li>
                 <li class="code_li">
                     <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">select[multiple] {
+  padding: 0;
+  scrollbar-width: thin;
+  border: 1px solid #a2a9b6;
+  background-color: #2a80eb;
+  min-width: 150px;
+  outline: none;
+  line-height: 1.25rem;
+  border-radius: 4px;
+  overflow: auto;
+}
+option {
+  padding: .375rem 2rem .375rem 1rem;
+  box-shadow: inset 0 1px #ededef;
+  color: #4c5161;
+  font-size: .875rem;
+  background-color: #fff;
+}
+option::after {
+  content: ' ✓';
+  color: transparent;
+}
+option:hover {
+    background-color: #f0f7ff;
+}
+option:checked {
+  background-color: #e0f0ff;
+  mix-blend-mode: lighten;
+}
+option:checked::after {
+    color: currentColor;
+}</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
                         <h5>JS：</h5>
-    <pre name="code" class="js">// 观察页面所有的form元素，绑定reset事件
-document.addEventListener('reset', function(event) {
-    // 事件对象e中的target属性，指向触发事件的元素
-    var target = event.target;
-    // 如果触发事件的元素是form元素
-    if (target.tagName.toLowerCase() === 'form') {
-        // 遍历form元素中的所有input元素
-        var inputs = [].slice.call(target.elements);
-        // 只有当前后值变化的时候才会触发 change 事件
-        inputs.forEach(function (input) {
-            input.tempValue = input.value;
-        });
+    <pre name="code" class="js">// 让多选框的value属性返回所有选中项的值
+Object.defineProperty(HTMLSelectElement.prototype, 'value', {
+  configurable: true,
+  enumerable: true,
+  writeable: true,
+  get: function () {
+    return [...select.selectedOptions].map(option => option.value).join();
+  },
+  set: function (value) {
+    [...this.options].some((option) => {
+      if (value.split(',').includes(option.value)) {
+        option.selected = true;
+        // 单选第一个匹配即选中
+        if (!this.multiple) {
+          return true;
+        }
+      } else if (this.multiple) {
+        option.selected = false;
+      }
+    });
+  }
+});
 
-        setTimeout(function () {
-            inputs.forEach(function (input) {
-                if (input.tempValue !== input.value) {
-                    input.dispatchEvent(new Event('change'));
-                }
-            });
-        }, 1);
-    }
-}, false);
-
-// 正常的业务代码
-input.onchange = function () {
-  output.textContent = 68 * this.value;
-};</pre>
+select.onchange = function () {
+  console.log('选中的值：' + this.value);
+}</pre>
                     </div>
                 </li>
             </ul>
