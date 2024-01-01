@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>showOpenFilePicker与普通按钮触发文件选择</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Button.css">
+    <style>
+.demo {
+    width: min(360px, calc(100vw - 2rem));
+    margin-inline: auto;
+}
+p {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.demo img {
+  width: calc(50% - 0.5rem);
+  aspect-ratio: 1;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px #eee;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>showOpenFilePicker与普通按钮触发文件选择演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<button id="button" type="primary" is="ui-button">选择图片</button>
+<p id="output"></p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;button id="button" type="primary" is="ui-button"&gt;选择图片&lt;/button&gt;
+&lt;p id="output"&gt;&lt;/p&gt;</pre>
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">p {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+img {
+  width: calc(50% - 0.5rem);
+  aspect-ratio: 1;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px #eee;
+}</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">if (window.showOpenFilePicker) {
+    button.addEventListener('click', async function () {
+        // 打开文件
+        const arrFileHandle = await window.showOpenFilePicker({
+            types: [{
+                description: 'Images',
+                accept: {
+                    'image/*': ['.png', '.gif', '.jpeg', '.jpg', '.webp']
+                }
+            }],
+            multiple: true
+        });
+        
+        // 遍历选择的文件
+        for (const fileHandle of arrFileHandle) {
+            // 获取文件内容
+            const fileData = await fileHandle.getFile();
+            // 读文件数据
+            const buffer = await fileData.arrayBuffer();
+            // 转成Blod url地址
+            let src = URL.createObjectURL(new Blob([buffer]));
+            // 在页面中显示
+            output.insertAdjacentHTML('beforeend', `&lt;img src="${src}"&gt;`);
+        }
+    });
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+if (window.showOpenFilePicker) {
+    button.addEventListener('click', async function () {
+        // 打开文件
+        const arrFileHandle = await window.showOpenFilePicker({
+            types: [{
+                description: 'Images',
+                accept: {
+                    'image/*': ['.png', '.gif', '.jpeg', '.jpg', '.webp']
+                }
+            }],
+              multiple: true
+        });
+        
+        // 遍历选择的文件
+        for (const fileHandle of arrFileHandle) {
+            // 获取文件内容
+            const fileData = await fileHandle.getFile();
+            // 读文件数据
+            const buffer = await fileData.arrayBuffer();
+            // 转成Blod url地址
+            let src = URL.createObjectURL(new Blob([buffer]));
+            // 在页面中显示
+            output.insertAdjacentHTML('beforeend', `<img src="${src}">`);
+        }
+    });
+}
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
