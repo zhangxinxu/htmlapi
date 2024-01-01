@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>webkitdirectory与文件夹选择</title>
+    <link rel="import" href="../include/meta.html">
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/Select.css">
+    <style>
+.demo {
+    width: min(360px, calc(100vw - 2rem));
+    margin-inline: auto;
+    text-align: start;
+}
+ul {
+  margin-top: 1rem;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>webkitdirectory属性与文件夹选择</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<input type="file" id="filepicker" name="fileList" webkitdirectory multiple />
+<ul id="listing"></ul>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;input type="file" id="filepicker" name="fileList" webkitdirectory multiple /&gt;
+&lt;ul id="listing"&gt;&lt;/ul&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">filepicker.addEventListener('change', (event) =&gt; {
+  for (const file of event.target.files) {
+    const item = document.createElement('li');
+    item.textContent = file.webkitRelativePath;
+    listing.appendChild(item);
+  }
+}, false);</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+filepicker.addEventListener('change', (event) => {
+  for (const file of event.target.files) {
+    const item = document.createElement('li');
+    item.textContent = file.webkitRelativePath;
+    listing.appendChild(item);
+  }
+}, false);
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
