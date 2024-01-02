@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>datalist元素与输入匹配列表</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <style>
+.demo {
+    width: min(360px, calc(100vw - 2rem));
+    margin-inline: auto;
+    text-align: start;
+}
+input:not(:where([type="range"], [type="color"])) {
+    padding: 4px 8px;
+    font-size: 100%;
+    font-family: system-ui;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>datalist元素与输入匹配列表演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4 class="fill">1. 静态匹配</h4>
+账号：<input list="data" placeholder="手机号、昵称或邮箱">
+<datalist id="data">
+    <option value="13208033621">
+    <option value="zhangxinxu">
+    <option value="iamzhangxinxu@qq.com">
+    <option value="test">
+    <option value="abcdefg">
+</datalist>
+
+<h4 class="fill">2. 动态匹配</h4>
+邮箱：<input id="input" type="email" list="mails" placeholder="输入邮箱">
+<datalist id="mails"></datalist>
+
+<h4 class="fill">3. 时间选择</h4>
+会议时间：<input type="time" list="hours" />
+<datalist id="hours">
+  <option value="12:00"></option>
+  <option value="13:00"></option>
+  <option value="14:00"></option>
+</datalist>
+
+<h4 class="fill">4. 范围选择推荐值</h4>
+字号：<input type="range" list="fonts" min="12" max="24" value="16">px
+<datalist id="fonts">
+  <option value="14"></option>
+  <option value="16"></option>
+  <option value="18"></option>
+  <option value="20"></option>
+</datalist>
+
+<h4 class="fill">5. 颜色选择推荐值</h4>
+口红色：<input type="color" list="redColors" value="#cd1111">
+<datalist id="redColors">
+  <option value="#800000"></option>
+  <option value="#8B0000"></option>
+  <option value="#A52A2A"></option>
+  <option value="#DC143C"></option>
+</datalist>
+
+
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4 class="fill"&gt;1. 静态匹配&lt;/h4&gt;
+账号：&lt;input list="data" placeholder="手机号、昵称或邮箱"&gt;
+&lt;datalist id="data"&gt;
+    &lt;option value="13208033621"&gt;
+    &lt;option value="zhangxinxu"&gt;
+    &lt;option value="iamzhangxinxu@qq.com"&gt;
+    &lt;option value="test"&gt;
+    &lt;option value="abcdefg"&gt;
+&lt;/datalist&gt;
+
+&lt;h4 class="fill"&gt;2. 动态匹配&lt;/h4&gt;
+邮箱：&lt;input id="input" type="email" list="mails" placeholder="输入邮箱"&gt;
+&lt;datalist id="mails"&gt;&lt;/datalist&gt;
+
+&lt;h4 class="fill"&gt;3. 时间选择&lt;/h4&gt;
+会议时间：&lt;input type="time" list="hours" /&gt;
+&lt;datalist id="hours"&gt;
+  &lt;option value="12:00"&gt;&lt;/option&gt;
+  &lt;option value="13:00"&gt;&lt;/option&gt;
+  &lt;option value="14:00"&gt;&lt;/option&gt;
+&lt;/datalist&gt;
+
+&lt;h4 class="fill"&gt;4. 范围选择推荐值&lt;/h4&gt;
+字号：&lt;input type="range" list="fonts" min="12" max="24" value="16"&gt;px
+&lt;datalist id="fonts"&gt;
+  &lt;option value="14"&gt;&lt;/option&gt;
+  &lt;option value="16"&gt;&lt;/option&gt;
+  &lt;option value="18"&gt;&lt;/option&gt;
+  &lt;option value="20"&gt;&lt;/option&gt;
+&lt;/datalist&gt;
+
+&lt;h4 class="fill"&gt;5. 颜色选择推荐值&lt;/h4&gt;
+口红色：&lt;input type="color" list="redColors" value="#cd1111"&gt;
+&lt;datalist id="redColors"&gt;
+  &lt;option value="#800000"&gt;&lt;/option&gt;
+  &lt;option value="#8B0000"&gt;&lt;/option&gt;
+  &lt;option value="#A52A2A"&gt;&lt;/option&gt;
+  &lt;option value="#DC143C"&gt;&lt;/option&gt;
+&lt;/datalist&gt;</pre>
+                        
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+                        <pre name="code" class="js">input.addEventListener('input', function () {
+    const value = this.value.split('@')[0];
+    const datalist = this.list;
+    const arr = ['qq.com', 'gmail.com', '126.com', '163.com'];
+    let html = '';
+    arr.forEach(email =&gt; {
+        html += `&lt;option value="${value}@${email}"&gt;`;
+    });
+    datalist.innerHTML = html;
+});</pre>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <script>
+        input.addEventListener('input', function () {
+            const value = this.value.split('@')[0];
+            const datalist = this.list;
+            const arr = ['qq.com', 'gmail.com', '126.com', '163.com'];
+            let html = '';
+            arr.forEach(email => {
+                html += `<option value="${value}@${email}">`;
+            });
+            datalist.innerHTML = html;
+        });
+    </script>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
