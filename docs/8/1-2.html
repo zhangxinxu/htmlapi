@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>table尺寸设置示意</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/LightTip.css">
+    <style>
+        .demo {
+            width: 600px;
+            margin-inline: auto;
+            text-align: start;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>table尺寸设置演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+
+<table>
+  <tr>
+    <th><input type="checkbox"></th>
+    <th>文章标题</th>
+    <th>发布日期</th>
+    <th>评论数</th>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>浅议星星的花朵</td>
+    <td>2015-07-20 16:23</td>
+    <td>7</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>空间小窝：萌是一种怎样的体验</td>
+    <td>2015-07-19 19:23</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>2015智能可穿戴市场白皮书</td>
+    <td>2015-07-18 09:09</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>《黑x金》企鹅FM品牌24小时诞生记</td>
+    <td>2015-07-18 00:36</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>小处显逼格：细节提升气质</td>
+    <td>2015-07-17 12:55</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>河南最强钉子户被强拆</td>
+    <td>2015-07-16 16:31</td>
+    <td>2万</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>台风“灿鸿”即将登陆魔都</td>
+    <td>2015-07-15 11:11</td>
+    <td>7639</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>浅议内滚动布局</td>
+    <td>2015-07-14 11:32</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>音乐不是你想卖，想卖他就买：提升用户购买欲的设计探索</td>
+    <td>2015-07-13 12:44</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Mac中国市场报告</td>
+    <td>2015-07-12 10:01</td>
+    <td>1</td>
+  </tr>
+</table>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;submit方法&lt;/h4&gt;
+&lt;form action="" method="get"&gt;
+    &lt;p&gt;&lt;input name="name" value="张三" /&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;textarea placeholder="Ctrl+Enter提交"&gt;&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;input type="submit" value="提交" /&gt;
+&lt;/form&gt;
+
+&lt;h4&gt;requestSubmit方法&lt;/h4&gt;
+&lt;form action="" method="get"&gt;
+    &lt;p&gt;&lt;input name="name" value="李四" /&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;textarea placeholder="Ctrl+Enter提交"&gt;&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;input type="submit" value="提交" /&gt;
+&lt;/form&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+    <pre name="code" class="js">document.querySelectorAll('form').forEach((form, index) =&gt; {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Ajax请求
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        new LightTip('提交了姓名：' + name, 'success');
+    });
+    // Ctrl+Enter文本域触发提交
+    form.querySelector('textarea').addEventListener('keydown', function (event) {
+        if (event.ctrlKey &amp;&amp; event.key === 'Enter') {
+            // 提交表单
+            form[index ? 'requestSubmit' : 'submit']();
+        }
+    });
+}); </pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script type="module" src="https://unpkg.com/lu2/theme/edge/js/common/ui/LightTip.js"></script>
+<script type="module">
+document.querySelectorAll('form').forEach((form, index) => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // Ajax请求
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        new LightTip('提交了姓名：' + name, 'success');
+        console.log('submitter：', event.submitter);
+    });
+    // Ctrl+Enter文本域触发提交
+    form.querySelector('textarea').addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            // 提交表单
+            form[index ? 'requestSubmit' : 'submit']();
+            // form.dispatchEvent(new Event('submit'));
+            // form.requestSubmit(form.querySelector('[type="submit"]'));
+        }
+    });
+});    
+</script>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>

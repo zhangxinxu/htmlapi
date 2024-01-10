@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>table等分布局和flex等分布局差异</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/LightTip.css">
+    <style>
+.demo {
+    width: 300px;
+    margin-inline: auto;
+    text-align: start;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table .td {
+  display: table-cell;
+}
+.flex {
+  display: flex;
+}
+.flex .item {
+  flex: 1;
+}
+:is(.table, .flex) img {
+  width: 100%;
+}
+.td, .item {
+  border: 1px solid;
+}
+:is(.table, .flex) p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>table等分布局和flex等分布局差异演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4 class="fill">Table布局</h4>
+<div class="table">
+  <div class="td"><p>我是一段长文字，我要打点显示</p></div>
+  <div class="td"><img src="/assets/example.jpg"></div>
+  <div class="td">文字</div>
+</div>
+
+<h4 class="fill">Flex布局</h4>
+<div class="flex">
+  <div class="item"><p>我是一段长文字，我要打点显示</p></div>
+  <div class="item"><img src="/assets/example.jpg"></div>
+  <div class="item">文字</div>
+</div>
+
+
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4 class="fill"&gt;Table布局&lt;/h4&gt;
+&lt;div class="table"&gt;
+  &lt;div class="td"&gt;&lt;p&gt;我是一段长文字，我要打点显示&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="td"&gt;&lt;img src="/assets/example.jpg"&gt;&lt;/div&gt;
+  &lt;div class="td"&gt;文字&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h4 class="fill"&gt;Flex布局&lt;/h4&gt;
+&lt;div class="flex"&gt;
+  &lt;div class="item"&gt;&lt;p&gt;我是一段长文字，我要打点显示&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="item"&gt;&lt;img src="/assets/example.jpg"&gt;&lt;/div&gt;
+  &lt;div class="item"&gt;文字&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+    <pre name="code" class="css">.table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table .td {
+  display: table-cell;
+}
+.flex {
+  display: flex;
+}
+.flex .item {
+  flex: 1;
+}
+:is(.table, .flex) img {
+  width: 100%;
+}
+.td, .item {
+  border: 1px solid;
+}
+:is(.table, .flex) p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
