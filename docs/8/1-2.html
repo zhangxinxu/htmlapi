@@ -9,7 +9,6 @@
 <meta name="author" content="张鑫旭, zhangxinxu" />
 <link rel="stylesheet" href="/assets/common.css">
 
-  <link rel="stylesheet" href="https://unpkg.com/lu2/theme/edge/css/common/ui/LightTip.css">
   <style>
     .demo {
       width: 300px;
@@ -58,7 +57,7 @@
 </table>
 
 <h4 class="fill">td、th边框</h4>
-<table class="table-2" width="300" cellspacing="0" cellpadding="10">
+<table class="table-2" width="300" cellpadding="10">
   <tr>
     <th>特性</th>
     <th>支持</th>
@@ -96,7 +95,7 @@
 &lt;/table&gt;
 
 &lt;h4 class="fill"&gt;td、th边框&lt;/h4&gt;
-&lt;table class="table-2" width="300" cellspacing="0" cellpadding="10"&gt;
+&lt;table class="table-2" width="300" cellpadding="10"&gt;
   &lt;tr&gt;
     &lt;th&gt;特性&lt;/th&gt;
     &lt;th&gt;支持&lt;/th&gt;
@@ -132,28 +131,6 @@
             </ul>
         </div>       
     </div>
-<script type="module" src="https://unpkg.com/lu2/theme/edge/js/common/ui/LightTip.js"></script>
-<script type="module">
-document.querySelectorAll('form').forEach((form, index) => {
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        // Ajax请求
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        new LightTip('提交了姓名：' + name, 'success');
-        console.log('submitter：', event.submitter);
-    });
-    // Ctrl+Enter文本域触发提交
-    form.querySelector('textarea').addEventListener('keydown', function (event) {
-        if (event.ctrlKey && event.key === 'Enter') {
-            // 提交表单
-            form[index ? 'requestSubmit' : 'submit']();
-            // form.dispatchEvent(new Event('submit'));
-            // form.requestSubmit(form.querySelector('[type="submit"]'));
-        }
-    });
-});    
-</script>
     <div class="footer">
     <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
     <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
