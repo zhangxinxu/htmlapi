@@ -42,11 +42,7 @@ a{color:#34538b;}
 .decimal > li, .disc > li { margin: .5em 0; }
 .go-bbs{position:relative;}
 .go-bbs > a{position: absolute; right: 0; padding: 0 10px; line-height: 36px; top: -36px;}
-
-table{width:100%;background:#a0b3d6; font-size:12px; border-spacing: 1px;}
-th{border:3px solid #fff; background:#f0f3f9; text-align:center;}
-td{padding:2px 4px; border:3px solid #fff; background:#f9f9f9;}
-tr:hover{opacity:0.95; filter:Alpha(opacity=95);}
+.go-bbs > a:hover{color: #cd0000;}
 .button {
     padding: 10px 20px;
     border: 1px solid #2a80eb;
