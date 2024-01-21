@@ -16,28 +16,6 @@
     text-align: start;
 }
 
-/* grid 布局 */
-ui-grid,
-.ui-grid {
-    display: grid;
-    gap: var(--ui-gap, 0);
-}
-
-/* 左侧项目宽度整体一致自适应的弹性表格布局 */
-ui-grid[form],
-.ui-grid[data-form],
-form.ui-grid {
-    grid: auto / auto 1fr;
-    align-items: center;
-}
-ui-grid[form] hr,
-.ui-grid[data-form] hr,
-form.ui-grid hr,
-ui-grid [span="2"],
-.ui-grid [span="2"] {
-    grid-column: 1 / span 2;
-}
-
 textarea {
   padding: 5px 10px;
   width: 100%;
