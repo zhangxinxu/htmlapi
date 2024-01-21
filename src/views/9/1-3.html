@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML autocapitalize属性与大小写输入</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+.demo {
+    width: 300px;
+    margin-inline: auto;
+    text-align: start;
+}
+
+/* grid 布局 */
+ui-grid,
+.ui-grid {
+    display: grid;
+    gap: var(--ui-gap, 0);
+}
+
+/* 左侧项目宽度整体一致自适应的弹性表格布局 */
+ui-grid[form],
+.ui-grid[data-form],
+form.ui-grid {
+    grid: auto / auto 1fr;
+    align-items: center;
+}
+ui-grid[form] hr,
+.ui-grid[data-form] hr,
+form.ui-grid hr,
+ui-grid [span="2"],
+.ui-grid [span="2"] {
+    grid-column: 1 / span 2;
+}
+
+textarea {
+  padding: 5px 10px;
+  width: 100%;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>autocapitalize属性与大小写输入演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>默认</h4>
+<textarea></textarea>
+
+<h4>none或off</h4>
+<textarea autocapitalize="off"></textarea>
+
+<h4>sentences或on</h4>
+<textarea autocapitalize="on"></textarea>
+
+<h4>words</h4>
+<textarea autocapitalize="words"></textarea>
+
+<h4>characters</h4>
+<textarea autocapitalize="characters"></textarea>
+
+<p class="remind">输入英文句子，例如：stay hungry, htay foolish</p>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;默认&lt;/h4&gt;
+&lt;textarea&gt;&lt;/textarea&gt;
+
+&lt;h4&gt;none或off&lt;/h4&gt;
+&lt;textarea autocapitalize="off"&gt;&lt;/textarea&gt;
+
+&lt;h4&gt;sentences或on&lt;/h4&gt;
+&lt;textarea autocapitalize="on"&gt;&lt;/textarea&gt;
+
+&lt;h4&gt;words&lt;/h4&gt;
+&lt;textarea autocapitalize="words"&gt;&lt;/textarea&gt;
+
+&lt;h4&gt;characters&lt;/h4&gt;
+&lt;textarea autocapitalize="characters"&gt;&lt;/textarea&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+<pre name="code" class="css">textarea {
+  padding: 5px 10px;
+  width: 100%;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
