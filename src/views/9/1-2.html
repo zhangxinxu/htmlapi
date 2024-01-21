@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML inputmode属性与软键盘类型</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+.demo {
+    width: 300px;
+    margin-inline: auto;
+    text-align: start;
+}
+
+/* grid 布局 */
+ui-grid,
+.ui-grid {
+    display: grid;
+    gap: var(--ui-gap, 0);
+}
+
+/* 左侧项目宽度整体一致自适应的弹性表格布局 */
+ui-grid[form],
+.ui-grid[data-form],
+form.ui-grid {
+    grid: auto / auto 1fr;
+    align-items: center;
+}
+ui-grid[form] hr,
+.ui-grid[data-form] hr,
+form.ui-grid hr,
+ui-grid [span="2"],
+.ui-grid [span="2"] {
+    grid-column: 1 / span 2;
+}
+
+input {
+  padding: 5px 10px;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>HTML inputmode属性与软键盘类型演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+<h4>decimal测试</h4>
+<p class="ui-grid" data-form>验证码：<input inputmode="decimal"></p>
+
+<h4>其他值：</h4>
+<ui-grid form style="--ui-gap: .5rem;">
+    none<input inputmode="none">
+    decimal<input inputmode="decimal">
+    tel<input inputmode="tel">
+    search<input inputmode="search">
+    email<input inputmode="email">
+    url<input inputmode="url">
+</ui-grid>
+            </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;h4&gt;decimal测试&lt;/h4&gt;
+&lt;p class="ui-grid" data-form&gt;验证码：&lt;input inputmode="decimal"&gt;&lt;/p&gt;
+
+&lt;h4&gt;其他值：&lt;/h4&gt;
+&lt;ui-grid form style="--ui-gap: .5rem;"&gt;
+    none&lt;input inputmode="none"&gt;
+    decimal&lt;input inputmode="decimal"&gt;
+    tel&lt;input inputmode="tel"&gt;
+    search&lt;input inputmode="search"&gt;
+    email&lt;input inputmode="email"&gt;
+    url&lt;input inputmode="url"&gt;
+&lt;/ui-grid&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>CSS：</h5>
+<pre name="code" class="css">input {
+  padding: 5px 10px;
+}</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
