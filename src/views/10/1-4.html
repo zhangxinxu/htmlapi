@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML is属性与内置自定义元素</title>
+    <link rel="import" href="../include/meta.html">
+    <style>
+.demo {
+    width: fit-content;
+    margin-inline: auto;
+    text-align: start;
+}
+
+dialog {
+    outline: 50vmax solid rgba(0, 0, 0, 0.7);
+    z-index: 19;
+}
+    </style>
+</head>
+<body>
+    <link rel="import" href="../include/header.html">
+    <div class="main">
+        <h1>HTML is属性与内置自定义元素</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                <button onclick="dialog.show()">点击显示</button>
+<dialog id="dialog" is="zxx-dialog">
+    <p>我是内容。</p>
+    <p><button onclick="dialog.hide()">关闭</button></p>
+</dialog>
+
+        </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;button onclick="dialog.show()"&gt;点击显示&lt;/button&gt;
+&lt;dialog id="dialog" is="zxx-dialog"&gt;
+    &lt;p&gt;我是内容。&lt;/p&gt;
+    &lt;p&gt;&lt;button onclick="dialog.hide()"&gt;关闭&lt;/button&gt;&lt;/p&gt;
+&lt;/dialog&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+<pre name="code" class="js">class ZxxDialog extends HTMLDialogElement {
+  constructor() {
+    super();
+  }
+  hide () {
+    this.close();
+  }
+}
+// 定义组件名称
+customElements.define("zxx-dialog", ZxxDialog, { extends: "dialog" });</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<script>
+class ZxxDialog extends HTMLDialogElement {
+  constructor() {
+    super();
+  }
+  hide () {
+    this.close();
+  }
+}
+// 定义组件名称
+customElements.define("zxx-dialog", ZxxDialog, { extends: "dialog" });
+</script>
+    <link rel="import" href="../include/footer.html">
+</body>
+</html>
