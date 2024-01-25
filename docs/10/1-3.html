@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML exportparts属性设置弹框按钮样式</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="author" content="张鑫旭, zhangxinxu" />
+<link rel="stylesheet" href="/assets/common.css">
+
+    <style>
+.demo {
+    width: fit-content;
+    margin-inline: auto;
+    text-align: start;
+}
+
+button {
+    font-size: 14px;
+}
+
+::part(dialog) {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+}
+::part(button) {
+    padding: 10px 20px;
+    border: 1px solid #2a80eb;
+    border-radius: 4px;
+    background-color: #2a80eb;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+	<a href="/" class="logo" title="回到demo首页"></a>	
+</div>
+    <div class="main">
+        <h1>HTML exportparts设置弹框按钮样式演示页面</h1>
+        <div class="show">
+            <h3>展示</h3>
+            <div class="go-bbs"><a href="https://github.com/zhangxinxu/htmlapi/issues" class="go-bbs">提问交流 &raquo;</a></div>
+            <div class="demo">
+                <button class="button">点击显示</button>
+<zxx-alert>
+    <p slot="alert">看看弹出框和按钮的样式吧</p>
+</zxx-alert>
+
+        </div>
+
+            <h3>代码</h3>
+            <ul class="codes">
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>HTML：</h5>
+    <pre name="code" class="html">&lt;style&gt;
+::part(dialog) {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+}
+::part(button) {
+    padding: 10px 20px;
+    border: 1px solid #2a80eb;
+    border-radius: 4px;
+    background-color: #2a80eb;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}&lt;/style&gt;
+
+&lt;button class="button"&gt;点击显示&lt;/button&gt;
+&lt;zxx-alert&gt;
+    &lt;p slot="alert"&gt;看看弹出框和按钮的样式吧&lt;/p&gt;
+&lt;/zxx-alert&gt;</pre></div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>模板HTML：</h5>
+<pre name="code" class="html">&lt;template id="alertTpl"&gt;
+    &lt;style&gt;
+        :host(:not([open])) {
+            display: none;
+        }
+        :host {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(25, 28, 34, 0.88);
+            z-index: 19;
+            display: grid;
+            place-items: center;
+        }
+        dialog {
+            position: static;
+            display: inherit;
+        }
+    &lt;/style&gt;
+    &lt;dialog part="dialog"&gt;
+        &lt;slot name="alert"&gt;暂无提示信息&lt;/slot&gt;
+        &lt;p&gt;
+            &lt;zxx-button exportparts="button"&gt;确定&lt;/zxx-button&gt;
+        &lt;/p&gt;
+    &lt;/dialog&gt;
+&lt;/template&gt;</pre>
+                    </div>
+                </li>
+                <li class="code_li">
+                    <div class="code_x">
+                        <h5>JS：</h5>
+<pre name="code" class="js">customElements.define('zxx-alert', class extends HTMLElement {
+    constructor() {
+        super();
+        const contentDoc = document.getElementById('alertTpl').content;
+        const shadowRoot = this.attachShadow({
+            mode: 'open'
+        }).append(contentDoc.cloneNode(true));  
+    }
+    connectedCallback () {
+        // 确定按钮点击关闭弹框
+        this.shadowRoot.querySelector('zxx-button').onclick = () =&gt; {
+            this.toggleAttribute('open', false);
+        };
+    }
+});
+customElements.define('zxx-button', class extends HTMLElement {
+    constructor() {
+        super();
+        // 创建按钮元素
+        const button = document.createElement('button');
+        // 按钮文字
+        button.textContent = this.textContent;
+        // 按钮样式
+        button.part = 'button';
+        // 作为shadowRoot内容
+        const shadowRoot = this.attachShadow({
+            mode: 'open'
+        }).append(button);  
+    }
+});</pre>
+                    </div>
+                </li>
+            </ul>
+        </div>       
+    </div>
+<template id="alertTpl">
+    <style>
+        :host(:not([open])) {
+            display: none;
+        }
+        :host {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(25, 28, 34, 0.88);
+            z-index: 19;
+            display: grid;
+            place-items: center;
+        }
+        dialog {
+            position: static;
+            display: inherit;
+        }
+    </style>
+    <dialog part="dialog">
+        <slot name="alert">暂无提示信息</slot>
+        <p>
+            <zxx-button exportparts="button">确定</zxx-button>
+        </p>
+    </dialog>
+</template>
+<script>
+customElements.define('zxx-alert', class extends HTMLElement {
+    constructor() {
+        super();
+        const contentDoc = document.getElementById('alertTpl').content;
+        const shadowRoot = this.attachShadow({
+            mode: 'open'
+        }).append(contentDoc.cloneNode(true));  
+    }
+    connectedCallback () {
+        // 确定按钮点击关闭弹框
+        this.shadowRoot.querySelector('zxx-button').onclick = () => {
+            this.toggleAttribute('open', false);
+        };
+    }
+});
+customElements.define('zxx-button', class extends HTMLElement {
+    constructor() {
+        super();
+        // 创建按钮元素
+        const button = document.createElement('button');
+        // 按钮文字
+        button.textContent = this.textContent;
+        // 按钮样式
+        button.part = 'button';
+        // 作为shadowRoot内容
+        const shadowRoot = this.attachShadow({
+            mode: 'open'
+        }).append(button);  
+    }
+});
+
+document.querySelectorAll('.demo > button').forEach(function (button) {
+	button.onclick = function () {
+		this.nextElementSibling.toggleAttribute('open', true);	
+	};
+});
+</script>
+    <div class="footer">
+    <div>Designed &amp; Powered by <a href="https://www.zhangxinxu.com/" target="_blank">zhangxinxu</a></div>
+    <div><a href="/" class="index">Demo索引地图</a> &emsp; <a href="https://github.com/zhangxinxu/htmlapi/issues">提问交流</a></div>  
+</div>
+<script src="/assets/all.js"></script>
+<script>
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+</script>
+</body>
+</html>
