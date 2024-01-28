@@ -1,0 +1,9 @@
+<svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+  <title>马儿跑</title>
+  <g> 
+    <text font-family="microsoft yahei" font-size="120" y="160" x="160">
+		马
+	    <set attributeName="x" attributeType="XML" to="60" begin="3s" />
+	</text>
+  </g>
+</svg>

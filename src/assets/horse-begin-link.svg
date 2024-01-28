@@ -1,0 +1,8 @@
+<svg width="320" height="200" font-family="microsoft yahei" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <text font-size="120" y="160" x="160">马
+          <animate id="animate" attributeName="x" to="60" begin="indefinite" dur="3s" repeatCount="indefinite" />
+     </text>
+	 <a xlink:href="#animate">
+          <text x="10" y="50" fill="#cd0000" font-size="30">点击我</text>
+     </a>
+</svg>

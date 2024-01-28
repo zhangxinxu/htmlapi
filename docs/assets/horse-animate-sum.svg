@@ -1,0 +1,7 @@
+<svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+    <title>马儿跑</title>
+    <text font-family="microsoft yahei" font-size="40" y="60" x="100">马
+        <animateTransform attributeName="transform" type="scale" from="1" to="2" dur="10s" repeatCount="indefinite" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 100 60" to="360 100 60" dur="10s" fill="freeze" repeatCount="indefinite" additive="sum"/>
+    </text>
+</svg>
