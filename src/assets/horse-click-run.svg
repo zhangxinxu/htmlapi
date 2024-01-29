@@ -1,0 +1,6 @@
+<svg id="svg" width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+    <circle id="circle" cx="100" cy="100" r="50"></circle>
+    <text font-family="microsoft yahei" font-size="120" y="160" x="160">马
+        <animate attributeName="x" to="60" begin="circle.click" dur="3s" />
+    </text>
+</svg>
