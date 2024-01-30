@@ -145,6 +145,40 @@ const clean = async function (src) {
 	} catch(e) {}
 };
 
+const compileHTML = function (data, src) {
+	// 下面要做的事情就是把
+	// <link rel="import" href="header.html">
+	// 这段HTML替换成href文件中的内容
+	let arrQuery = [];
+	// 可以求助万能的正则
+	data = data.replace(/<link\srel="import"\shref="(.*)">/gi, function (matchs, m1) {
+		// m1就是匹配的路径地址了
+		let roots = m1.split('?')[0];
+
+		if (m1 !== roots) {
+			arrQuery.push(m1.split('?')[1]);
+		}
+		return fs.readFileSync(path.join(src, roots), {
+			encoding: 'utf8'
+		});
+	});
+
+	if (arrQuery.length) {
+		arrQuery.forEach(function (query) {
+			// 查询与替换
+			query.split('&').forEach(function (parts) {
+				let key = parts.split('=')[0];
+				let value = parts.split('=')[1] || '';
+
+				data = data.replace('$' + key + '$', value);
+			});
+		});
+	}
+
+	// 替换多余的变量
+	return data.replace(/\$\w+\$/g, '');
+}
+
 /*
 ** html文件import编译方法
 ** @src String html开发目录
@@ -162,42 +196,8 @@ const compile = async function (src, dist) {
 				encoding: 'utf8'
 			})
 
-			// 下面要做的事情就是把
-			// <link rel="import" href="header.html">
-			// 这段HTML替换成href文件中的内容
-			let arrQuery = [];
-			// 可以求助万能的正则
-			const promises = [];
-			data.replace(/<link\srel="import"\shref="(.*)">/gi, function (matchs, m1) {
-				// m1就是匹配的路径地址了
-				let roots = m1.split('?')[0];
-
-				if (m1 !== roots) {
-					arrQuery.push(m1.split('?')[1]);
-				}
-				promises.push(fs_readFile(path.join(src, roots),{
-					encoding: 'utf8'
-				}));
-			});
-
-			await Promise.all(promises).then(results => {
-				data = data.replace(/<link\srel="import"\shref="(.*)">/gi, () => results.shift())
-			})
-
-			if (arrQuery.length) {
-				arrQuery.forEach(function (query) {
-					// 查询与替换
-					query.split('&').forEach(function (parts) {
-						let key = parts.split('=')[0];
-						let value = parts.split('=')[1] || '';
-
-						data = data.replace('$' + key + '$', value);
-					});
-				});
-			}
-
 			// 替换多余的变量
-			data = data.replace(/\$\w+\$/g, '');
+			data = compileHTML(data, src);
 
 			// 于是生成新的HTML文件
 			await fs_writeFile(path.join(dist, filename), data, {
@@ -205,11 +205,6 @@ const compile = async function (src, dist) {
 			})
 
 			console.log(filename + '生成成功！');
-
-			await fs_readFile(path.join(src, filename), {
-				// 需要指定编码方式，否则返回原生buffer
-				encoding: 'utf8'
-			})
 		}
 	});
 };
@@ -245,8 +240,66 @@ const task = {
             });	
 		},
         // 首页的编译
-        home: function () {
-            compile(pathSrcHTML, pathDistHTML);
+        home: async function () {
+			let data = await fs_readFile(path.join(pathSrcHTML, 'index.html'), {
+				// 需要指定编码方式，否则返回原生buffer
+				encoding: 'utf8'
+			})
+
+			// 替换多余的变量
+			data = compileHTML(data, pathSrcHTML);
+
+			// 获取所有文件夹下的html文件的<title>标签内容
+			let html = '';
+
+			const dirSrc = fs.readdirSync(pathSrcHTML);
+            dirSrc.forEach(async dir => {
+				const dirPath = path.join(pathSrcHTML, dir);
+                let st = fs.statSync(dirPath);
+                if (st.isDirectory(dir) && /^\d+$/.test(dir)) {
+                    // 遍历 dirPath
+					html += `<div class="column" style="order:${dir}"><h4 class="column-title">第${dir}章</h4>`;
+					const dirPathDir = fs.readdirSync(dirPath);
+					dirPathDir.forEach(async filename => {
+						if (/\.html$/.test(filename) && /^\d/.test(filename)) {
+							// .html文件才处理
+							// 读文件内容
+							let fileHtml = fs.readFileSync(path.join(dirPath, filename), {
+								// 需要指定编码方式，否则返回原生buffer
+								encoding: 'utf8'
+							})
+
+							// 匹配title
+							const arrTitle = fileHtml.match(/<title>(.*)<\/title>/);
+							if (arrTitle) {
+								html += `<a href="https://www.htmlapi.cn/${dir}/${filename}" target="_htmlapi_html" class="column-a">${arrTitle[1]}</a>`;
+							}
+						}
+					});
+
+					if (dir == '13') {
+						// 插入SVG访问
+						const dirAssets = fs.readdirSync(pathSrcAssets);
+						dirAssets.forEach(async filename => {
+							if (/\.svg$/.test(filename) && filename.startsWith('horse')) {
+								html += `<a href="https://www.htmlapi.cn/assets/${filename}" target="_htmlapi_svg" class="column-a">${filename}</a>`;
+							}
+						});
+					}
+
+					html += '</div>';
+                }
+            });	
+
+            // 替换 {{replace}} 为 html 内容
+			data = data.replace('{{replace}}', html);
+
+			// 于是生成新的HTML文件
+			await fs_writeFile(path.join(pathDistHTML, 'index.html'), data, {
+				encoding: 'utf8'
+			})
+
+			console.log('index.html生成成功！');
         },
 		init: async function () {
 			// 删除对应文件夹
@@ -298,7 +351,7 @@ fs.watch(pathSrcHTML, {
 
 
     if (filename == 'index.html') {
-        task.html.home();
+        // task.html.home();
     } else {
         timerHTML = setTimeout(() => {
 			const fullPath = path.join(pathSrcHTML, filename);
@@ -310,7 +363,7 @@ fs.watch(pathSrcHTML, {
 			}
              
             console.log('HTML编译执行...');
-        }, 100);
+        }, 190);
     }
 });
 
